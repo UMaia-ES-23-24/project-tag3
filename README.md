@@ -16,10 +16,6 @@ UResults
 
 ## Vision Statement
 
-A app for fans of competition. Joining traditional sports and Esports UResults gives its users Information about his favorite teams, match history, Odds, Individual player information and more!
-Unlike other apps, our app givess the user information about all types of sports and in depth info about teams and players, with the ability to filter out relevant information so you can customize it to your tastes!
-
-
 For sport fans who need more information about their favorite team(s), Uresults is a Sports Aplication that has information about traditional sports such as Football, Baseball, Basketball, Tennis, etc.. And unlike [Maisfutebol](https://maisfutebol.iol.pt/) we have eSports the eletronic sports! You can see your favourite video game and team in live tournaments!
 
 ## Main Features
