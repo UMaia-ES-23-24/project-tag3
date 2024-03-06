@@ -4,7 +4,7 @@ TAG3
 
 ## Members
 
-Hugo Martins - A043898
+Hugo Martins - A043898 <br>
 Diogo Soares Gonçalves - A042244
 João Pedro Ferreira Sá - A042256
 Otávio Affonso Araújo - A042508
