@@ -5,7 +5,10 @@ TAG3
 ## Members
 
 Hugo Martins - A043898
-
+Diogo Soares Gonçalves - A042244
+João Pedro Ferreira Sá - A042256
+Otávio Affonso Araújo - A042508
+Gonçalo Caridade Ribeiro - A043540
 
 # Product Name
 
