@@ -29,4 +29,6 @@ For sport fans who need more information about their favorite team(s), Uresults 
 
 ## Required API's
 
-- Student timetable from UMaia
+- [Balldontlie](https://www.balldontlie.io/)
+- [Football Prediction](https://developer.boggio-analytics.com/getting-started/api-endpoints)
+- [Football Prediction](https://developer.boggio-analytics.com/getting-started/api-endpoints)
