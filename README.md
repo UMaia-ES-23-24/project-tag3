@@ -16,7 +16,7 @@ UResults
 
 ## Vision Statement
 
-For sport fans who need more information about their favorite team(s), Uresults is a Sports Aplication that has information about Physical Sports such as Football, Baseball, Basketball, Tennis, etc.. And unlike [Maisfutebol](https://maisfutebol.iol.pt/) we have eSports the eletronic sports! You can see your favourite video game team in a live tournament!
+For sport fans who need more information about their favorite team(s), Uresults is a Sports Aplication that has information about Physical Sports such as Football, Baseball, Basketball, Tennis, etc.. And unlike [Maisfutebol](https://maisfutebol.iol.pt/) we have eSports the eletronic sports! You can see your favourite video game and team in live tournaments!
 
 ## Main Features
 
