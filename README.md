@@ -14,9 +14,9 @@ Gonçalo Caridade Ribeiro - A043540 <br>
 
 UResults
 
-## Vision Stament
+## Vision Statement
 
-For sport fans who need more information about their favorite team(s), Uresults is a Sports Aplication that has information about Sports and Esports unlike maisfutebol our product has Esports.
+For sport fans who need more information about their favorite team(s), Uresults is a Sports Aplication that has information about Physical Sports such as Football, Baseball, Basketball, Tennis, etc.. And as innovation we have eSports the eletronic sports! You can see your favourite video game team in a live tournament!
 
 ## Main Features
 
@@ -26,6 +26,9 @@ For sport fans who need more information about their favorite team(s), Uresults 
  - Feature 3 - Live status of the players performance
  - Feature 4 - Show scoreboard
  - Feature 5 - Show the leaderboard of differente competitions
+ - Feature 6 - 
+ - Feature 7 -
+ - Feature 8 -
 
 ## Required API's
 
