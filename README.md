@@ -26,6 +26,7 @@ For sport fans who need more information about their favorite team(s), Uresults 
  - Feature 3 - Live status of the players performance
  - Feature 4 - Show scoreboard
  - Feature 5 - Show the leaderboard of differente competitions
+ - Feature 6 - Watch live matches
 
 ## Required API's
 
