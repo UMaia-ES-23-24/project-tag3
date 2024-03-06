@@ -16,7 +16,7 @@ UResults
 
 ## Vision Stament
 
-For sport fans who need more information about their favorite team(s), Uresults is a Sports Aplication that has information about Sports and Esports unlike maisfutebol ou product has Esports.
+For sport fans who need more information about their favorite team(s), Uresults is a Sports Aplication that has information about Sports and Esports unlike maisfutebol our product has Esports.
 
 ## Main Features
 
