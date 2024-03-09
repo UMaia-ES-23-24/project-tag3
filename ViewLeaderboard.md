@@ -1,7 +1,7 @@
 |||
 | --- | --- |
 | *Name* | View Leaderboard for Different Competitions |
-| *Actor* | Jonny Walls Jr. |
+| *Actor* | User |
 | *Description* | View the leaderboard for different competitions |
 | *Preconditions* | The app has the latest leaderboard data available |
 | *Postconditions* | The customer sees the leaderboard for the selected competition |
