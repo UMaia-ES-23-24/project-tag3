@@ -2,7 +2,7 @@
 |||
 | --- | --- |
 | *Name* | Watch Live Matches |
-| *Actor* | Jonny Walls Sr.|
+| *Actor* | User|
 | *Description* | Watch live matches through the app |
 | *Preconditions* | The app has access to live streaming services and the user has a stable internet connection |
 | *Postconditions* | The customer is watching the selected live match |
