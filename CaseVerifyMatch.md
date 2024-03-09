@@ -1,7 +1,7 @@
 |||
 | --- | --- |
 | *Name* | Verify Matchups |
-| *Actor* |  Customer | 
+| *Actor* |  User | 
 | *Description* | The customer verifies a match result. |
 | *Preconditions* | - The customer needs to select the type of sport. <br> - The customer needs to select the League or Team. |
 | *Postconditions* | - The customer gets information about the match selected. |
