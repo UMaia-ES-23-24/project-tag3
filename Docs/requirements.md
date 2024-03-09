@@ -1,71 +1,84 @@
-
 ## Requirements
 
-In this section, you should describe all kinds of requirements for your module: functional and non-functional requirements.
+The following are our Functional requirements
 
-### Use case model 
+### Use case model
 
-Create a use-case diagram in UML with all high-level use cases possibly addressed by your module, to clarify the context and boundaries of your application.
+- P.S Streaming Channel should be any possible way to legally watch the live match, example: Official Riot Games Twitch stream
 
-Give each use case a concise, results-oriented name. Use cases should reflect the tasks the user needs to be able to accomplish using the system. Include an action verb and a noun. 
-
-Example:
  <p align="center" justify="center">
-  <img src="https://github.com/UMaia-ES-23-24/templates/blob/main/images/UseCaseView2.png?raw=true"/>
+  <img src="https://github.com/UMaia-ES-23-24/project-tag3/blob/main/Images/UMLSport.png"/>
 </p>
 
-Briefly describe each use case mentioning the following:
 
-* **Actor**. Name only the actor that will be initiating this use case, i.e. a person or other entity external to the software system being specified who interacts with the system and performs use cases to accomplish tasks. 
-* **Description**. Provide a brief description of the reason for and outcome of this use case, or a high-level description of the sequence of actions and the outcome of executing the use case. 
-* **Preconditions and Postconditions**. Include any activities that must take place, or any conditions that must be true, before the use case can be started (preconditions). Describe also the state of the system at the conclusion of the use case execution (postconditions). 
+### Verify Matchups
 
-* **Normal Flow**. Provide a detailed description of the user actions and system responses that will take place during execution of the use case under normal, expected conditions. This dialog sequence will ultimately lead to accomplishing the goal stated in the use case name and description. This is best done as a numbered list of actions performed by the actor, alternating with responses provided by the system. 
-* **Alternative Flows and Exceptions**. Document other, legitimate usage scenarios that can take place within this use case, stating any differences in the sequence of steps that take place. In addition, describe any anticipated error conditions that could occur during execution of the use case, and define how the system is to respond to those conditions. 
-
-Example:
-|||
+|     |     |
 | --- | --- |
-| *Name* | Purchase tickets online |
-| *Actor* |  Customer | 
-| *Description* | The customer purchases one or more tickets for an event, using an electronic payment method, having the option to choose places. |
-| *Preconditions* | - The customer has electronic payment means. <br> - The event has tickets available on-sale. |
-| *Postconditions* | - The customer gets the electronic tickets with a QR code. <br> - The customer is charged of the tickets’ cost, and the seller credited. <br> - Information of tickets sold & seats available for the event is updated. |
-| *Normal flow* | 1. The customer accesses the web page of the ticketing system.<br> 2. The system shows the list of events with tickets on-sale.<br> 3. The customer selects the event and the number of tickets.<br> 4. If wanted, the costumer may Choose Places.<br> 5. The system shows the total price to pay.<br> 6. The system redirects the customer to Electronic Payment.<br> 7. The system delivers the electronic tickets to the customer with a unique identifier and QR code. |
-| *Alternative flows and exceptions* | 1. [Payment failure] If, in step 6 of the normal flow the payment fails, the system gives the user the possibility to cancel or retry. |
+| *Name* | Verify Matchups |
+| *Actor* | User |
+| *Description* | The customer verifies a match result. |
+| *Preconditions* | \- The customer needs to select the type of sport.  <br>\- The customer needs to select the League or Team. |
+| *Postconditions* | \- The customer gets information about the match selected. |
+| *Normal flow* | 1\. The customer accesses the application  <br>2\. The system shows the option to choose the type of sports.  <br>3\. The system shows the option to choose the League or a Team.  <br>4\. The system shows the League or Team's Matches. |
+| *Alternative flows and exceptions* |     |
 
-### User stories
-The user stories should be created as GitHub issues. Therefore, this section will *not* exist in your report, it is here only to explain how you should describe the requirements of the product as **user stories**. 
+### See the odds for a specific game
 
-A user story is a description of desired functionality told from the perspective of the user or customer. A starting template for the description of a user story is 
+|     |     |
+| --- | --- |
+| *Name* | See the odds for a specific game |
+| *Actor* | User |
+| *Description* | See the odds for a specific game |
+| *Preconditions* | The app has the odds |
+| *Postconditions* | The customer sees the odds |
+| *Normal flow* | 1.The user opens the app  <br>2.The user chooses a sport category  <br>3.The user selects a league and the desired match  <br>4\. The app will provide the odds for the selected match |
+| *Alternative flows and exceptions* | If error on step 3 the System don't send any odds and redirect user to 2 step again |
 
-*As a < user role >, I want < goal > so that < reason >.*
+### Player Performance
 
-User stories should be created and described as [Issues](https://github.com/UMaia-ES-23-24/templates/issues) in GitHub with the label "user story". See how to in the video [Creating a Product Backlog of User Stories for Agile Development using GitHub](https://www.youtube.com/watch?v=m8ZxTHSKSKE).
+|     |     |
+| --- | --- |
+| *Name* | Live status of the players performance |
+| *Actor* | User |
+| *Description* | View the players performance for different matches |
+| *Preconditions* | The app has the latest players performance data available |
+| *Postconditions* | The customer sees the players performance for the selected match |
+| *Normal flow* | 1\. The user opens the app.  <br>2.The user chooses a sport category  <br>3\. The user navigates to the Select player section  <br>4\. The user selects the team and player  <br>5\. The system displays the player information |
+| *Alternative flows and exceptions* |     |
 
-You should name the issue with the text of the user story, and, in the "comments" field, add any relevant notes, the image(s) of the user interface mockup(s) (see below) and the acceptance test scenarios (see below). 
+### View leaderboard
 
-**INVEST in good user stories**. 
-You may add more details after, but the shorter and complete, the better. In order to decide if the user story is good, please follow the [INVEST guidelines](https://xp123.com/articles/invest-in-good-stories-and-smart-tasks/).
+|     |     |
+| --- | --- |
+| *Name* | View Leaderboard for Different Competitions |
+| *Actor* | User |
+| *Description* | View the leaderboard for different competitions |
+| *Preconditions* | The app has the latest leaderboard data available |
+| *Postconditions* | The customer sees the leaderboard for the selected competition |
+| *Normal flow* | 1\. The user opens the app  <br>2\. The user navigates to the Leaderboard section  <br>3.The user selects a league and the desired match  <br>4\. The system displays the leaderboard for the selected competition |
+| *Alternative flows and exceptions* | If the user selects a competition that does not exist or is not available the system provides feedback and allows the user to choose another competition. |
 
-**User interface mockups**.
-After the user story text, you should add a draft of the corresponding user interfaces, a simple mockup or draft, if applicable.
+### View scoreboard
 
-**Acceptance tests**.
-For each user story you should write also the acceptance tests (textually in [Gherkin](https://cucumber.io/docs/gherkin/reference/)), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+|     |     |
+| --- | --- |
+| *Name* | View Scoreboard |
+| *Actor* | User |
+| *Description* | View the scoreboard for different matches |
+| *Preconditions* | The app has the latest scoreboard data available |
+| *Postconditions* | The customer sees the scoreboard for the selected match |
+| *Normal flow* | 1\. The user opens the app.  <br>2\. The user navigates to the matches section.  <br>3\. The user selects a specific match from the available list.  <br>4\. The system displays the scoreboard for the selected match. |
+| *Alternative flows and exceptions* | If the user selects a match that does not exist or is not available the system provides feedback and allows the user to choose another competition. |
 
-**Value and effort**.
-At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. [MoSCoW](https://en.wikipedia.org/wiki/MoSCoW_method) method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
+### Watch Live match
 
-
-
-### Domain model
-
-To better understand the context of the software system, it is very useful to have a simple UML class diagram with all the key concepts (names, attributes) and relationships involved of the problem domain addressed by your module. 
-Also provide a short textual description of each class. 
-
-
-Example:
- <p align="center" justify="center">
-  <img src="https://github.com/UMaia-ES-23-24/templates/blob/main/images/DomainModel.png?raw=true"/>
-</p>
+|     |     |
+| --- | --- |
+| *Name* | Watch Live Matches |
+| *Actor* | User |
+| *Description* | Watch live matches through the app |
+| *Preconditions* | The app has access to live streaming services and the user has a stable internet connection |
+| *Postconditions* | The customer is watching the selected live match |
+| *Normal flow* | 1\. The user opens the app  <br>2.The user chooses a sport category  <br>3\. The user selects a league and match  <br>4\. The user navigates to the live match section  <br>5\. The system connects to the API service for the selected match |
+| *Alternative flows and exceptions* | If the selected live match is not available for streaming, the system informs the user and suggests choosing another live match. |
