@@ -13,7 +13,6 @@ Gonçalo Caridade Ribeiro - A043540 <br>
 # Product Name
 
 UResults
-<img src="https://github.com/UMaia-ES-23-24/project-tag3/blob/main/Images/FigmaMocks/Escolher-Liga.png" alt="image" width="200" height="200">
 
 ## Vision Statement
 
