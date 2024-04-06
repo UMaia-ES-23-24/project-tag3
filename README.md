@@ -23,10 +23,10 @@ For sport fans who need more information about their favorite team(s), Uresults 
  - Feature 1 - Give information about matchups, in both Sports types
  - Feature 2 - Odds in diferent betting sites if available
  - Feature 3 - Live Scores divided in competitions
- - Feature 3 - Live status of the players performance
- - Feature 4 - Show scoreboard
- - Feature 5 - Show the leaderboard of differente competitions
- - Feature 6 - Watch live matches
+ - Feature 4 - Live status of the players performance
+ - Feature 5 - Show scoreboard
+ - Feature 6 - Show the leaderboard of differente competitions
+ - Feature 7 - Watch live matches
 
 
 ## Required API's
