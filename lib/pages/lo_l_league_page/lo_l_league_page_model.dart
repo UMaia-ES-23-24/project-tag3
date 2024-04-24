@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'home_page_copy_widget.dart' show HomePageCopyWidget;
+import 'lo_l_league_page_widget.dart' show LoLLeaguePageWidget;
 import 'package:flutter/material.dart';
 
-class HomePageCopyModel extends FlutterFlowModel<HomePageCopyWidget> {
+class LoLLeaguePageModel extends FlutterFlowModel<LoLLeaguePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

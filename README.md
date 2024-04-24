@@ -1,4 +1,4 @@
-# TAG3 Project
+# TAG3
 
 A new Flutter project.
 

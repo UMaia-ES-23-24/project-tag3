@@ -1,4 +1,4 @@
-package com.mycompany.tag3project
+package com.mycompany.tag3
 
 import io.flutter.embedding.android.FlutterActivity
 
