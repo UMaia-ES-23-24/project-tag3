@@ -19,6 +19,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _initialSearch = prefs.getString('ff_initialSearch') ?? _initialSearch;
     });
+    _safeInit(() {
+      _idlegal = prefs.getInt('ff_idlegal') ?? _idlegal;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -132,6 +135,19 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInFavorites(int index, String value) {
     _Favorites.insert(index, value);
+  }
+
+  int _idlegal = 0;
+  int get idlegal => _idlegal;
+  set idlegal(int value) {
+    _idlegal = value;
+    prefs.setInt('ff_idlegal', value);
+  }
+
+  bool _falhouCall = false;
+  bool get falhouCall => _falhouCall;
+  set falhouCall(bool value) {
+    _falhouCall = value;
   }
 }
 

@@ -124,7 +124,13 @@ class _LigasFootWidgetState extends State<LigasFootWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             context.pushNamed(
-                              'SportPage',
+                              'footLeaguePage',
+                              queryParameters: {
+                                'idLeague': serializeParam(
+                                  leagueItem,
+                                  ParamType.JSON,
+                                ),
+                              }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: const TransitionInfo(
                                   hasTransition: true,
@@ -160,8 +166,8 @@ class _LigasFootWidgetState extends State<LigasFootWidget> {
                                     borderRadius: BorderRadius.circular(12.0),
                                     child: Image.network(
                                       getJsonField(
-                                        (_model.apiResultyh0?.jsonBody ?? ''),
-                                        r'''$.response[0].league.logo''',
+                                        leagueItem,
+                                        r'''$.league.logo''',
                                       ).toString(),
                                       width: 44.0,
                                       height: 44.0,
@@ -170,11 +176,11 @@ class _LigasFootWidgetState extends State<LigasFootWidget> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 0.0, 0.0, 0.0),
+                                        20.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       getJsonField(
                                         leagueItem,
-                                        r'''$.response[0].league.name''',
+                                        r'''$.league.name''',
                                       ).toString(),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
@@ -188,6 +194,19 @@ class _LigasFootWidgetState extends State<LigasFootWidget> {
                                           ),
                                     ),
                                   ),
+                                  if (FFAppState()
+                                          .Favorites
+                                          .contains('CBLOL') ==
+                                      true)
+                                    const Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          100.0, 0.0, 0.0, 0.0),
+                                      child: Icon(
+                                        Icons.star,
+                                        color: Color(0xF3DBC300),
+                                        size: 24.0,
+                                      ),
+                                    ),
                                 ],
                               ),
                             ),

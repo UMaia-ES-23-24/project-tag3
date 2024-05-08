@@ -101,11 +101,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const SettingsWidget(),
         ),
         FFRoute(
-          name: 'SportPage',
-          path: '/sportPage',
-          builder: (context, params) => const SportPageWidget(),
-        ),
-        FFRoute(
           name: 'LolzinhoLigas',
           path: '/lolzinhoLigas',
           builder: (context, params) => const LolzinhoLigasWidget(),
@@ -113,9 +108,35 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'LoLLeaguePage',
           path: '/loLLeaguePage',
-          builder: (context, params) => const LoLLeaguePageWidget(),
+          builder: (context, params) => LoLLeaguePageWidget(
+            idLeague: params.getParam(
+              'idLeague',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'VideoplayerLeague',
+          path: '/videoplayerLeague',
+          builder: (context, params) => const VideoplayerLeagueWidget(),
+        ),
+        FFRoute(
+          name: 'LeaguePlayers',
+          path: '/leaguePlayers',
+          builder: (context, params) => const LeaguePlayersWidget(),
+        ),
+        FFRoute(
+          name: 'footLeaguePage',
+          path: '/footLeaguePage',
+          builder: (context, params) => FootLeaguePageWidget(
+            idLeague: params.getParam(
+              'idLeague',
+              ParamType.JSON,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {
@@ -209,7 +230,7 @@ class FFParameters {
   // present is the special extra parameter reserved for the transition info.
   bool get isEmpty =>
       state.allParams.isEmpty ||
-      (state.extraMap.length == 1 &&
+      (state.allParams.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -230,10 +251,10 @@ class FFParameters {
 
   dynamic getParam<T>(
     String paramName,
-    ParamType type, [
+    ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
-  ]) {
+  }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
     }

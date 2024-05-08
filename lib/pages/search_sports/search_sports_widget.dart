@@ -5,6 +5,7 @@ import '/prefabs/football_dialogue/football_dialogue_widget.dart';
 import '/prefabs/lolzinho_dialogue/lolzinho_dialogue_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'search_sports_model.dart';
 export 'search_sports_model.dart';
 
@@ -31,9 +32,6 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
         _model.isShowFullList = !_model.isShowFullList;
       });
     });
-
-    _model.searchTermTextController ??= TextEditingController();
-    _model.searchTermFocusNode ??= FocusNode();
   }
 
   @override
@@ -95,78 +93,6 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                      child: TextFormField(
-                        controller: _model.searchTermTextController,
-                        focusNode: _model.searchTermFocusNode,
-                        autofocus: true,
-                        textInputAction: TextInputAction.search,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Search Sport ',
-                          labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0.0,
-                                  ),
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0.0,
-                                  ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Readex Pro',
-                              letterSpacing: 0.0,
-                            ),
-                        validator: _model.searchTermTextControllerValidator
-                            .asValidator(context),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
             ListView(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
@@ -192,15 +118,18 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                               backgroundColor: Colors.transparent,
                               alignment: const AlignmentDirectional(0.0, 0.0)
                                   .resolve(Directionality.of(context)),
-                              child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: const SizedBox(
-                                  height: 350.0,
-                                  width: 530.0,
-                                  child: FootballDialogueWidget(),
+                              child: WebViewAware(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: const SizedBox(
+                                    height: 350.0,
+                                    width: 530.0,
+                                    child: FootballDialogueWidget(),
+                                  ),
                                 ),
                               ),
                             );
@@ -360,12 +289,15 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                               backgroundColor: Colors.transparent,
                               alignment: const AlignmentDirectional(0.0, 0.0)
                                   .resolve(Directionality.of(context)),
-                              child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: const LolzinhoDialogueWidget(),
+                              child: WebViewAware(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: const LolzinhoDialogueWidget(),
+                                ),
                               ),
                             );
                           },

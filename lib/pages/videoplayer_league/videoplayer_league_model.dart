@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'search_sports_widget.dart' show SearchSportsWidget;
+import 'videoplayer_league_widget.dart' show VideoplayerLeagueWidget;
 import 'package:flutter/material.dart';
 
-class SearchSportsModel extends FlutterFlowModel<SearchSportsWidget> {
+class VideoplayerLeagueModel extends FlutterFlowModel<VideoplayerLeagueWidget> {
   ///  Local state fields for this page.
 
   bool isShowFullList = true;
