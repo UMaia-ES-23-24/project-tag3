@@ -14,3 +14,10 @@
 - favorites were made in a way that only saves the name because we couldn't figure out how to do a list that would update a container with different variables.
 
 - Video player only works with youtube links
+
+
+### Initial board
+![img](https://github.com/UMaia-ES-23-24/project-tag3/blob/main/Images/Second-iteration24Apr.png)
+
+### Final Board
+![img](https://github.com/UMaia-ES-23-24/project-tag3/blob/main/Images/BoardFinal2.png)
