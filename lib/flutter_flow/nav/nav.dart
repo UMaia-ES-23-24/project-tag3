@@ -86,9 +86,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const SearchSportsWidget(),
         ),
         FFRoute(
-          name: 'LigasFoot',
-          path: '/ligasFoot',
-          builder: (context, params) => const LigasFootWidget(),
+          name: 'FootLigas',
+          path: '/footLigas',
+          builder: (context, params) => const FootLigasWidget(),
         ),
         FFRoute(
           name: 'Home',
@@ -118,7 +118,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'VideoplayerLeague',
           path: '/videoplayerLeague',
-          builder: (context, params) => const VideoplayerLeagueWidget(),
+          builder: (context, params) => VideoplayerLeagueWidget(
+            leagueInfoDoJogoSelecionado: params.getParam(
+              'leagueInfoDoJogoSelecionado',
+              ParamType.JSON,
+            ),
+          ),
         ),
         FFRoute(
           name: 'LeaguePlayers',
@@ -393,4 +398,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }

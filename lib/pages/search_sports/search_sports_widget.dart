@@ -5,6 +5,7 @@ import '/prefabs/football_dialogue/football_dialogue_widget.dart';
 import '/prefabs/lolzinho_dialogue/lolzinho_dialogue_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'search_sports_model.dart';
 export 'search_sports_model.dart';
@@ -43,6 +44,8 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -109,6 +112,130 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                       highlightColor: Colors.transparent,
                       onTap: () async {
                         await showDialog(
+                          context: context,
+                          builder: (dialogContext) {
+                            return Dialog(
+                              elevation: 0,
+                              insetPadding: EdgeInsets.zero,
+                              backgroundColor: Colors.transparent,
+                              alignment: const AlignmentDirectional(0.0, 0.0)
+                                  .resolve(Directionality.of(context)),
+                              child: WebViewAware(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: const SizedBox(
+                                    height: 350.0,
+                                    width: 530.0,
+                                    child: FootballDialogueWidget(),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+                      },
+                      onLongPress: () async {
+                        if (FFAppState().Favorites.contains('Football') ==
+                            true) {
+                          setState(() {
+                            FFAppState().removeFromFavorites('Football');
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().addToFavorites('Football');
+                          });
+                        }
+                      },
+                      child: Container(
+                        width: 350.0,
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x2D101213),
+                              offset: Offset(
+                                0.0,
+                                2.0,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            if (FFAppState().Favorites.contains('Football') ==
+                                true)
+                              const Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 0.0, 0.0),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Color(0xF3DBC300),
+                                  size: 24.0,
+                                ),
+                              ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    15.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Football',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 20.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 20.0, 0.0),
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(0.0),
+                                  bottomRight: Radius.circular(0.0),
+                                  topLeft: Radius.circular(0.0),
+                                  topRight: Radius.circular(0.0),
+                                ),
+                                child: Image.asset(
+                                  'assets/images/football-png-transparent-image-2000-996556980.png',
+                                  width: 80.0,
+                                  height: 80.0,
+                                  fit: BoxFit.scaleDown,
+                                  alignment: const Alignment(0.0, 0.0),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Builder(
+                  builder: (context) => Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 24.0, 0.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        await showDialog(
                           barrierDismissible: false,
                           context: context,
                           builder: (dialogContext) {
@@ -156,117 +283,58 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'Football',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                    ),
+                            if (FFAppState().Favorites.contains('CBLOL') ==
+                                true)
+                              const Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 0.0, 0.0),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Color(0xF3DBC300),
+                                  size: 24.0,
+                                ),
+                              ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    15.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Basketball',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 20.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 20.0, 0.0),
-                              child: Container(
-                                width: 100.0,
-                                height: 100.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(0.0),
+                                  bottomRight: Radius.circular(0.0),
+                                  topLeft: Radius.circular(0.0),
+                                  topRight: Radius.circular(0.0),
                                 ),
-                                child: Align(
-                                  alignment: const AlignmentDirectional(1.0, 0.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/football-png-transparent-image-2000-996556980.png',
-                                      width: 80.0,
-                                      height: 80.0,
-                                      fit: BoxFit.cover,
-                                      alignment: const Alignment(0.0, 0.0),
-                                    ),
-                                  ),
+                                child: Image.asset(
+                                  'assets/images/basketball-hd-png-basketball-png-hd-png-image-1245.png',
+                                  width: 80.0,
+                                  height: 80.0,
+                                  fit: BoxFit.scaleDown,
+                                  alignment: const Alignment(0.0, 0.0),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 24.0, 0.0),
-                  child: Container(
-                    width: 350.0,
-                    height: 100.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: const [
-                        BoxShadow(
-                          blurRadius: 4.0,
-                          color: Color(0x2D101213),
-                          offset: Offset(
-                            0.0,
-                            2.0,
-                          ),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              20.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Basketball',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 20.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 20.0, 0.0),
-                          child: Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            child: Align(
-                              alignment: const AlignmentDirectional(1.0, 0.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/basketball-hd-png-basketball-png-hd-png-image-1245.png',
-                                  width: 80.0,
-                                  height: 80.0,
-                                  fit: BoxFit.cover,
-                                  alignment: const Alignment(0.0, 0.0),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ),
@@ -296,12 +364,31 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                                           ? FocusScope.of(context)
                                               .requestFocus(_model.unfocusNode)
                                           : FocusScope.of(context).unfocus(),
-                                  child: const LolzinhoDialogueWidget(),
+                                  child: const SizedBox(
+                                    height: 350.0,
+                                    width: 530.0,
+                                    child: LolzinhoDialogueWidget(),
+                                  ),
                                 ),
                               ),
                             );
                           },
                         ).then((value) => setState(() {}));
+                      },
+                      onLongPress: () async {
+                        if (FFAppState()
+                                .Favorites
+                                .contains('League of Legends') ==
+                            true) {
+                          setState(() {
+                            FFAppState()
+                                .removeFromFavorites('League of Legends');
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().addToFavorites('League of Legends');
+                          });
+                        }
                       },
                       child: Container(
                         width: 350.0,
@@ -323,44 +410,54 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'League Of Legends',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                    ),
+                            if (FFAppState()
+                                    .Favorites
+                                    .contains('League of Legends') ==
+                                true)
+                              const Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 0.0, 0.0),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Color(0xF3DBC300),
+                                  size: 24.0,
+                                ),
+                              ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    15.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'League of Legends',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 20.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 20.0, 0.0),
-                              child: Container(
-                                width: 100.0,
-                                height: 100.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(0.0),
+                                  bottomRight: Radius.circular(0.0),
+                                  topLeft: Radius.circular(0.0),
+                                  topRight: Radius.circular(0.0),
                                 ),
-                                child: Align(
-                                  alignment: const AlignmentDirectional(1.0, 0.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/21516-256x256x32.png',
-                                      width: 80.0,
-                                      height: 80.0,
-                                      fit: BoxFit.cover,
-                                      alignment: const Alignment(0.0, 0.0),
-                                    ),
-                                  ),
+                                child: Image.asset(
+                                  'assets/images/21516-256x256x32.png',
+                                  width: 80.0,
+                                  height: 80.0,
+                                  fit: BoxFit.scaleDown,
+                                  alignment: const Alignment(0.0, 0.0),
                                 ),
                               ),
                             ),

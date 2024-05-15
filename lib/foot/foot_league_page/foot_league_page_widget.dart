@@ -119,7 +119,7 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
             ),
             onPressed: () async {
               context.pushNamed(
-                'LolzinhoLigas',
+                'FootLigas',
                 extra: <String, dynamic>{
                   kTransitionInfoKey: const TransitionInfo(
                     hasTransition: true,
@@ -406,7 +406,7 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
                                               decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
+                                                        .secondaryBackground,
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
                                               ),
@@ -424,6 +424,8 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
                                                         fontFamily:
                                                             'Readex Pro',
                                                         letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                 ),
                                               ),

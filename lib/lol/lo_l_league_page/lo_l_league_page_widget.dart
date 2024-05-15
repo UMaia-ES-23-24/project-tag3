@@ -38,12 +38,15 @@ class _LoLLeaguePageWidgetState extends State<LoLLeaguePageWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResultg74 = await LegueGetSeriesCall.call(
-        id: valueOrDefault<int>(
+        filter: valueOrDefault<int>(
           FFAppState().idlegal,
           7020,
         ),
       );
       if ((_model.apiResultg74?.succeeded ?? true)) {
+        setState(() {
+          FFAppState().falhouCall = false;
+        });
         setState(() {
           FFAppState().listaLolzinho = LegueGetSeriesCall.seriesInfo(
             (_model.apiResultg74?.jsonBody ?? ''),
@@ -409,84 +412,56 @@ class _LoLLeaguePageWidgetState extends State<LoLLeaguePageWidget>
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Container(
-                                              width: 100.0,
-                                              height: 40.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              ),
-                                              alignment: const AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Text(
-                                                  'Video',
-                                                  style: FlutterFlowTheme.of(
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'VideoplayerLeague',
+                                                  queryParameters: {
+                                                    'leagueInfoDoJogoSelecionado':
+                                                        serializeParam(
+                                                      porFavorItem,
+                                                      ParamType.JSON,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Container(
+                                                width: 100.0,
+                                                height: 40.0,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                                      .secondaryBackground,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0),
                                                 ),
-                                              ),
-                                            ),
-                                          ].divide(const SizedBox(width: 20.0)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  ListView(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 0.0, 20.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                getJsonField(
-                                                  porFavorItem,
-                                                  r'''$.streams_list.*.embed_url''',
-                                                ).toString(),
-                                                textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                                alignment: const AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Text(
+                                                    'Video',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                            Text(
-                                              getJsonField(
-                                                porFavorItem,
-                                                r'''$.streams_list.*.language''',
-                                              ).toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ],
+                                          ].divide(const SizedBox(width: 20.0)),
                                         ),
                                       ),
                                     ],

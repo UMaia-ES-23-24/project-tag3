@@ -2,28 +2,29 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'ligas_foot_model.dart';
-export 'ligas_foot_model.dart';
+import 'foot_ligas_model.dart';
+export 'foot_ligas_model.dart';
 
-class LigasFootWidget extends StatefulWidget {
-  const LigasFootWidget({super.key});
+class FootLigasWidget extends StatefulWidget {
+  const FootLigasWidget({super.key});
 
   @override
-  State<LigasFootWidget> createState() => _LigasFootWidgetState();
+  State<FootLigasWidget> createState() => _FootLigasWidgetState();
 }
 
-class _LigasFootWidgetState extends State<LigasFootWidget> {
-  late LigasFootModel _model;
+class _FootLigasWidgetState extends State<FootLigasWidget> {
+  late FootLigasModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LigasFootModel());
+    _model = createModel(context, () => FootLigasModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -38,6 +39,9 @@ class _LigasFootWidgetState extends State<LigasFootWidget> {
         });
       }
     });
+
+    _model.searchTermTextController ??= TextEditingController();
+    _model.searchTermFocusNode ??= FocusNode();
   }
 
   @override
@@ -101,6 +105,68 @@ class _LigasFootWidgetState extends State<LigasFootWidget> {
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 12.0, 0.0),
+              child: TextFormField(
+                controller: _model.searchTermTextController,
+                focusNode: _model.searchTermFocusNode,
+                onChanged: (_) => EasyDebounce.debounce(
+                  '_model.searchTermTextController',
+                  const Duration(milliseconds: 500),
+                  () => setState(() {}),
+                ),
+                autofocus: false,
+                textInputAction: TextInputAction.search,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: 'Search Sport ',
+                  labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
+                  hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primary,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  errorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedErrorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  filled: true,
+                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Readex Pro',
+                      letterSpacing: 0.0,
+                    ),
+                validator: _model.searchTermTextControllerValidator
+                    .asValidator(context),
+              ),
+            ),
             Expanded(
               child: Builder(
                 builder: (context) {
@@ -194,19 +260,6 @@ class _LigasFootWidgetState extends State<LigasFootWidget> {
                                           ),
                                     ),
                                   ),
-                                  if (FFAppState()
-                                          .Favorites
-                                          .contains('CBLOL') ==
-                                      true)
-                                    const Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          100.0, 0.0, 0.0, 0.0),
-                                      child: Icon(
-                                        Icons.star,
-                                        color: Color(0xF3DBC300),
-                                        size: 24.0,
-                                      ),
-                                    ),
                                 ],
                               ),
                             ),

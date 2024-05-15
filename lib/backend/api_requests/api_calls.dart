@@ -12,7 +12,7 @@ class GetLeaguesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getLeagues',
       apiUrl:
-          'https://raw.githubusercontent.com/UMaia-ES-23-24/project-tag3/main/standings.json?token=GHSAT0AAAAAACRNXJS5G3WCCMSTJXUJOQLYZR3VQTA',
+          'https://raw.githubusercontent.com/UMaia-ES-23-24/project-tag3/main/getleagues.json?token=GHSAT0AAAAAACSKTQHTVKL3H3UHXTVDJD7OZSE2SZQ',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -59,15 +59,24 @@ class GetEsportCall {
         r'''$.*''',
         true,
       ) as List?;
+  static List<int>? serieid(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].serie_id''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
 }
 
 class LegueGetSeriesCall {
   static Future<ApiCallResponse> call({
-    int? id = 7020,
+    int? filter = 7020,
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'legue get series',
-      apiUrl: 'https://api.pandascore.co/series/$id/matches',
+      apiUrl: 'https://api.pandascore.co/lol/matches',
       callType: ApiCallType.GET,
       headers: {
         'accept': 'application/json',
@@ -75,7 +84,7 @@ class LegueGetSeriesCall {
             'Bearer MUJ92DYWwDbH_c1OT5JQ5qdVs232pMbGba-AWS6nhqi6LgB695g',
       },
       params: {
-        'id': id,
+        'filter[serie_id]': filter,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -90,6 +99,10 @@ class LegueGetSeriesCall {
         r'''$.*''',
         true,
       ) as List?;
+  static String? rawURL(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].streams_list[:].raw_url''',
+      ));
 }
 
 class LeagueGetPlayersCall {

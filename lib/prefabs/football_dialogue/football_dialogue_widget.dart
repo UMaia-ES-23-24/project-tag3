@@ -76,7 +76,7 @@ class _FootballDialogueWidgetState extends State<FootballDialogueWidget> {
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('LigasFoot');
+                          context.pushNamed('FootLigas');
                         },
                         text: 'Liga',
                         options: FFButtonOptions(

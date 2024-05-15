@@ -20,7 +20,13 @@ class FFAppState extends ChangeNotifier {
       _initialSearch = prefs.getString('ff_initialSearch') ?? _initialSearch;
     });
     _safeInit(() {
+      _Favorites = prefs.getStringList('ff_Favorites') ?? _Favorites;
+    });
+    _safeInit(() {
       _idlegal = prefs.getInt('ff_idlegal') ?? _idlegal;
+    });
+    _safeInit(() {
+      _videoURL = prefs.getString('ff_videoURL') ?? _videoURL;
     });
   }
 
@@ -112,18 +118,22 @@ class FFAppState extends ChangeNotifier {
   List<String> get Favorites => _Favorites;
   set Favorites(List<String> value) {
     _Favorites = value;
+    prefs.setStringList('ff_Favorites', value);
   }
 
   void addToFavorites(String value) {
     _Favorites.add(value);
+    prefs.setStringList('ff_Favorites', _Favorites);
   }
 
   void removeFromFavorites(String value) {
     _Favorites.remove(value);
+    prefs.setStringList('ff_Favorites', _Favorites);
   }
 
   void removeAtIndexFromFavorites(int index) {
     _Favorites.removeAt(index);
+    prefs.setStringList('ff_Favorites', _Favorites);
   }
 
   void updateFavoritesAtIndex(
@@ -131,10 +141,12 @@ class FFAppState extends ChangeNotifier {
     String Function(String) updateFn,
   ) {
     _Favorites[index] = updateFn(_Favorites[index]);
+    prefs.setStringList('ff_Favorites', _Favorites);
   }
 
   void insertAtIndexInFavorites(int index, String value) {
     _Favorites.insert(index, value);
+    prefs.setStringList('ff_Favorites', _Favorites);
   }
 
   int _idlegal = 0;
@@ -148,6 +160,42 @@ class FFAppState extends ChangeNotifier {
   bool get falhouCall => _falhouCall;
   set falhouCall(bool value) {
     _falhouCall = value;
+  }
+
+  List<dynamic> _leagueSelectedLeague = [];
+  List<dynamic> get leagueSelectedLeague => _leagueSelectedLeague;
+  set leagueSelectedLeague(List<dynamic> value) {
+    _leagueSelectedLeague = value;
+  }
+
+  void addToLeagueSelectedLeague(dynamic value) {
+    _leagueSelectedLeague.add(value);
+  }
+
+  void removeFromLeagueSelectedLeague(dynamic value) {
+    _leagueSelectedLeague.remove(value);
+  }
+
+  void removeAtIndexFromLeagueSelectedLeague(int index) {
+    _leagueSelectedLeague.removeAt(index);
+  }
+
+  void updateLeagueSelectedLeagueAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _leagueSelectedLeague[index] = updateFn(_leagueSelectedLeague[index]);
+  }
+
+  void insertAtIndexInLeagueSelectedLeague(int index, dynamic value) {
+    _leagueSelectedLeague.insert(index, value);
+  }
+
+  String _videoURL = '';
+  String get videoURL => _videoURL;
+  set videoURL(String value) {
+    _videoURL = value;
+    prefs.setString('ff_videoURL', value);
   }
 }
 

@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -116,23 +117,16 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
                       child: TextFormField(
                         controller: _model.searchTermTextController,
                         focusNode: _model.searchTermFocusNode,
-                        onFieldSubmitted: (_) async {
-                          _model.apiResult3se = await GetEsportCall.call();
-                          if ((_model.apiResult3se?.succeeded ?? true)) {
+                        onChanged: (_) => EasyDebounce.debounce(
+                          '_model.searchTermTextController',
+                          const Duration(milliseconds: 500),
+                          () async {
                             setState(() {
-                              FFAppState().listaLolzinho = GetEsportCall.names(
-                                (_model.apiResult3se?.jsonBody ?? ''),
-                              )!
-                                  .toList()
-                                  .cast<dynamic>();
+                              FFAppState().Search =
+                                  _model.searchTermTextController.text;
                             });
-                            setState(() {
-                              _model.searchTermTextController?.clear();
-                            });
-                          }
-
-                          setState(() {});
-                        },
+                          },
+                        ),
                         autofocus: false,
                         textInputAction: TextInputAction.search,
                         obscureText: false,
@@ -210,7 +204,12 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
                     itemBuilder: (context, lolzinhoIndex) {
                       final lolzinhoItem = lolzinho[lolzinhoIndex];
                       return Visibility(
-                        visible: FFAppState().Search == '',
+                        visible: (FFAppState().Search ==
+                                getJsonField(
+                                  lolzinhoItem,
+                                  r'''$.league.name''',
+                                )) ||
+                            (FFAppState().Search == ''),
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 16.0, 0.0),
@@ -223,7 +222,7 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
                               setState(() {
                                 FFAppState().idlegal = getJsonField(
                                   lolzinhoItem,
-                                  r'''$.league.id''',
+                                  r'''$.serie_id''',
                                 );
                               });
 
@@ -308,15 +307,6 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
                                         ),
                                       ),
                                     ),
-                                    if (FFAppState()
-                                            .Favorites
-                                            .contains('CBLOL') ==
-                                        true)
-                                      const Icon(
-                                        Icons.star,
-                                        color: Color(0xF3DBC300),
-                                        size: 24.0,
-                                      ),
                                   ],
                                 ),
                               ),
