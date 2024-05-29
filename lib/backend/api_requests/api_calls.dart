@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -12,7 +13,7 @@ class GetLeaguesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getLeagues',
       apiUrl:
-          'https://raw.githubusercontent.com/UMaia-ES-23-24/project-tag3/main/getleagues.json?token=GHSAT0AAAAAACSKTQHTVKL3H3UHXTVDJD7OZSE2SZQ',
+          'https://raw.githubusercontent.com/UMaia-ES-23-24/project-tag3/main/getleagues.json?token=GHSAT0AAAAAACOPZ2FKUI5DANSXF53E2A52ZSQ3WZA',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -124,12 +125,17 @@ class LeagueGetPlayersCall {
       alwaysAllowBody: false,
     );
   }
+
+  static dynamic players(dynamic response) => getJsonField(
+        response,
+        r'''$.*''',
+      );
 }
 
-class GetStandingsCall {
+class GetStandingsAntigoCall {
   static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
-      callName: 'getStandings',
+      callName: 'getStandingsAntigo',
       apiUrl: 'https://api-football-v1.p.rapidapi.com/v3/standings',
       callType: ApiCallType.GET,
       headers: {
@@ -144,6 +150,196 @@ class GetStandingsCall {
       alwaysAllowBody: false,
     );
   }
+}
+
+class FootStandingsCall {
+  static Future<ApiCallResponse> call({
+    String? league = '39',
+    String? season = '2023',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'FootStandings',
+      apiUrl: 'https://api-football-v1.p.rapidapi.com/v3/standings',
+      callType: ApiCallType.GET,
+      headers: {
+        'X-RapidAPI-Key': '94cc702bcdmsh9bf2fc562936d5ap156bd3jsn1a8eba97d1ba',
+        'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
+      },
+      params: {
+        'league': league,
+        'season': season,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? tudo(dynamic response) => getJsonField(
+        response,
+        r'''$.response[:].league.standings[:][:]''',
+        true,
+      ) as List?;
+}
+
+class BasketCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Basket',
+      apiUrl:
+          'https://basketapi1.p.rapidapi.com/api/basketball/tournament/all/category/264',
+      callType: ApiCallType.GET,
+      headers: {
+        'X-RapidAPI-Key': '2ddc658eedmsh5945739df921403p121165jsne13a1c9cfcf3',
+        'X-RapidAPI-Host': 'basketapi1.p.rapidapi.com',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetLeagueStatsCall {
+  static Future<ApiCallResponse> call({
+    String? teamid = '126061',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'get league stats',
+      apiUrl: 'https://api.pandascore.co/lol/teams/{team_id_or_slug}/stats',
+      callType: ApiCallType.GET,
+      headers: {
+        'accept': 'application/json',
+        'Authorization':
+            'Bearer MUJ92DYWwDbH_c1OT5JQ5qdVs232pMbGba-AWS6nhqi6LgB695g',
+      },
+      params: {
+        'TEAMID': teamid,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetFixturesIdUmCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getFixturesIdUm',
+      apiUrl:
+          'https://raw.githubusercontent.com/UMaia-ES-23-24/project-tag3/main/fixturesId1?token=GHSAT0AAAAAACSLJEMSFOV7R2ESW2LCUS6GZSOGCNQ',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? fixtures(dynamic response) => getJsonField(
+        response,
+        r'''$.api.fixtures[*]''',
+        true,
+      ) as List?;
+}
+
+class CSGOGetTournamentCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'CSGO get Tournament',
+      apiUrl: 'https://api.pandascore.co/csgo/tournaments',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization':
+            'Bearer MUJ92DYWwDbH_c1OT5JQ5qdVs232pMbGba-AWS6nhqi6LgB695g',
+        'accept': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? cSGOTourney(dynamic response) => getJsonField(
+        response,
+        r'''$.*''',
+        true,
+      ) as List?;
+  static List? cSGOMathces(dynamic response) => getJsonField(
+        response,
+        r'''$.*.matches.*''',
+        true,
+      ) as List?;
+}
+
+class CSGOGetMatchCall {
+  static Future<ApiCallResponse> call({
+    int? filter = 4849,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'CSGO get Match',
+      apiUrl: 'https://api.pandascore.co/csgo/matches',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization':
+            'Bearer MUJ92DYWwDbH_c1OT5JQ5qdVs232pMbGba-AWS6nhqi6LgB695g',
+      },
+      params: {
+        'filter[serie_id]': filter,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? cSGOMatchInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.*''',
+        true,
+      ) as List?;
+}
+
+class CSGOPlayersCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'CSGO Players',
+      apiUrl: 'https://api.pandascore.co/csgo/players',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization':
+            'Bearer MUJ92DYWwDbH_c1OT5JQ5qdVs232pMbGba-AWS6nhqi6LgB695g',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? players(dynamic response) => getJsonField(
+        response,
+        r'''$.*''',
+        true,
+      ) as List?;
 }
 
 class ApiPagingParams {
@@ -167,6 +363,9 @@ String _serializeList(List? list) {
   try {
     return json.encode(list);
   } catch (_) {
+    if (kDebugMode) {
+      print("List serialization failed. Returning empty list.");
+    }
     return '[]';
   }
 }
@@ -176,6 +375,9 @@ String _serializeJson(dynamic jsonVar, [bool isList = false]) {
   try {
     return json.encode(jsonVar);
   } catch (_) {
+    if (kDebugMode) {
+      print("Json serialization failed. Returning empty json.");
+    }
     return isList ? '[]' : '{}';
   }
 }

@@ -106,9 +106,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const LolzinhoLigasWidget(),
         ),
         FFRoute(
-          name: 'LoLLeaguePage',
-          path: '/loLLeaguePage',
-          builder: (context, params) => LoLLeaguePageWidget(
+          name: 'LoLMatches',
+          path: '/loLMatches',
+          builder: (context, params) => LoLMatchesWidget(
             idLeague: params.getParam(
               'idLeague',
               ParamType.int,
@@ -128,15 +128,65 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'LeaguePlayers',
           path: '/leaguePlayers',
-          builder: (context, params) => const LeaguePlayersWidget(),
+          builder: (context, params) => LeaguePlayersWidget(
+            playerSelecionado: params.getParam(
+              'playerSelecionado',
+              ParamType.JSON,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'footLeaguePage',
+          name: 'LolzinhoPlayersList',
+          path: '/lolzinhoPlayersList',
+          builder: (context, params) => const LolzinhoPlayersListWidget(),
+        ),
+        FFRoute(
+          name: 'CSGOPlayers',
+          path: '/cSGOPlayers',
+          builder: (context, params) => CSGOPlayersWidget(
+            playerSelecionado: params.getParam(
+              'playerSelecionado',
+              ParamType.JSON,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'CSGOMatches',
+          path: '/cSGOMatches',
+          builder: (context, params) => CSGOMatchesWidget(
+            idLeague: params.getParam(
+              'idLeague',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'CSGOTourneys',
+          path: '/cSGOTourneys',
+          builder: (context, params) => const CSGOTourneysWidget(),
+        ),
+        FFRoute(
+          name: 'CSGOPlayerList',
+          path: '/cSGOPlayerList',
+          builder: (context, params) => const CSGOPlayerListWidget(),
+        ),
+        FFRoute(
+          name: 'CSGOVideoPlayer',
+          path: '/cSGOVideoPlayer',
+          builder: (context, params) => CSGOVideoPlayerWidget(
+            leagueInfoDoJogoSelecionado: params.getParam(
+              'leagueInfoDoJogoSelecionado',
+              ParamType.JSON,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'FootLeaguePage',
           path: '/footLeaguePage',
           builder: (context, params) => FootLeaguePageWidget(
             idLeague: params.getParam(
               'idLeague',
-              ParamType.JSON,
+              ParamType.int,
             ),
           ),
         )

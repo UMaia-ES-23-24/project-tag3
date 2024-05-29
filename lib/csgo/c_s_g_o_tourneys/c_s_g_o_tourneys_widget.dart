@@ -6,32 +6,32 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'lolzinho_ligas_model.dart';
-export 'lolzinho_ligas_model.dart';
+import 'c_s_g_o_tourneys_model.dart';
+export 'c_s_g_o_tourneys_model.dart';
 
-class LolzinhoLigasWidget extends StatefulWidget {
-  const LolzinhoLigasWidget({super.key});
+class CSGOTourneysWidget extends StatefulWidget {
+  const CSGOTourneysWidget({super.key});
 
   @override
-  State<LolzinhoLigasWidget> createState() => _LolzinhoLigasWidgetState();
+  State<CSGOTourneysWidget> createState() => _CSGOTourneysWidgetState();
 }
 
-class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
-  late LolzinhoLigasModel _model;
+class _CSGOTourneysWidgetState extends State<CSGOTourneysWidget> {
+  late CSGOTourneysModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LolzinhoLigasModel());
+    _model = createModel(context, () => CSGOTourneysModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultmov = await GetEsportCall.call();
+      _model.apiResultmov = await CSGOGetTournamentCall.call();
       if ((_model.apiResultmov?.succeeded ?? true)) {
         setState(() {
-          FFAppState().listaLolzinho = GetEsportCall.names(
+          FFAppState().listaLolzinho = CSGOGetTournamentCall.cSGOTourney(
             (_model.apiResultmov?.jsonBody ?? ''),
           )!
               .toList()
@@ -227,7 +227,7 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
                               });
 
                               context.pushNamed(
-                                'LoLMatches',
+                                'CSGOMatches',
                                 queryParameters: {
                                   'idLeague': serializeParam(
                                     valueOrDefault<int>(

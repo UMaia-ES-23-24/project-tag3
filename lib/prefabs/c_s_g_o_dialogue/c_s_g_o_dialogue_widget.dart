@@ -2,18 +2,18 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'lolzinho_dialogue_model.dart';
-export 'lolzinho_dialogue_model.dart';
+import 'c_s_g_o_dialogue_model.dart';
+export 'c_s_g_o_dialogue_model.dart';
 
-class LolzinhoDialogueWidget extends StatefulWidget {
-  const LolzinhoDialogueWidget({super.key});
+class CSGODialogueWidget extends StatefulWidget {
+  const CSGODialogueWidget({super.key});
 
   @override
-  State<LolzinhoDialogueWidget> createState() => _LolzinhoDialogueWidgetState();
+  State<CSGODialogueWidget> createState() => _CSGODialogueWidgetState();
 }
 
-class _LolzinhoDialogueWidgetState extends State<LolzinhoDialogueWidget> {
-  late LolzinhoDialogueModel _model;
+class _CSGODialogueWidgetState extends State<CSGODialogueWidget> {
+  late CSGODialogueModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -24,7 +24,7 @@ class _LolzinhoDialogueWidgetState extends State<LolzinhoDialogueWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LolzinhoDialogueModel());
+    _model = createModel(context, () => CSGODialogueModel());
   }
 
   @override
@@ -76,7 +76,7 @@ class _LolzinhoDialogueWidgetState extends State<LolzinhoDialogueWidget> {
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('LolzinhoLigas');
+                          context.pushNamed('CSGOTourneys');
                         },
                         text: 'Liga',
                         options: FFButtonOptions(
@@ -98,7 +98,7 @@ class _LolzinhoDialogueWidgetState extends State<LolzinhoDialogueWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('LolzinhoPlayersList');
+                        context.pushNamed('CSGOPlayerList');
                       },
                       text: 'Jogadores',
                       options: FFButtonOptions(

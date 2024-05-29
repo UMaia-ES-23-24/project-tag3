@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/prefabs/c_s_g_o_dialogue/c_s_g_o_dialogue_widget.dart';
 import '/prefabs/football_dialogue/football_dialogue_widget.dart';
 import '/prefabs/lolzinho_dialogue/lolzinho_dialogue_widget.dart';
 import 'package:flutter/material.dart';
@@ -101,24 +102,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     borderRadius: BorderRadius.circular(225.0),
                                   ),
                                 ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    setState(() {
-                                      FFAppState().hasFavorites = true;
-                                    });
-                                  },
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(0.0),
-                                    child: Image.asset(
-                                      'assets/images/_f55ae261-8e06-4390-8522-b596894bdbeb.png',
-                                      width: 100.0,
-                                      height: 100.0,
-                                      fit: BoxFit.fitWidth,
-                                    ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(0.0),
+                                  child: Image.asset(
+                                    'assets/images/_f55ae261-8e06-4390-8522-b596894bdbeb.png',
+                                    width: 100.0,
+                                    height: 100.0,
+                                    fit: BoxFit.fitWidth,
                                   ),
                                 ),
                               ],
@@ -305,6 +295,36 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                             .unfocus(),
                                                     child:
                                                         const LolzinhoDialogueWidget(),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ).then((value) => setState(() {}));
+                                        }
+                                        if (favoritosItem == 'CS:GO') {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: const AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: WebViewAware(
+                                                  child: GestureDetector(
+                                                    onTap: () => _model
+                                                            .unfocusNode
+                                                            .canRequestFocus
+                                                        ? FocusScope.of(context)
+                                                            .requestFocus(_model
+                                                                .unfocusNode)
+                                                        : FocusScope.of(context)
+                                                            .unfocus(),
+                                                    child: const CSGODialogueWidget(),
                                                   ),
                                                 ),
                                               );

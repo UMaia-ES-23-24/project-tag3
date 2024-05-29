@@ -5,11 +5,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'league_players_model.dart';
-export 'league_players_model.dart';
+import 'c_s_g_o_players_model.dart';
+export 'c_s_g_o_players_model.dart';
 
-class LeaguePlayersWidget extends StatefulWidget {
-  const LeaguePlayersWidget({
+class CSGOPlayersWidget extends StatefulWidget {
+  const CSGOPlayersWidget({
     super.key,
     required this.playerSelecionado,
   });
@@ -17,18 +17,18 @@ class LeaguePlayersWidget extends StatefulWidget {
   final dynamic playerSelecionado;
 
   @override
-  State<LeaguePlayersWidget> createState() => _LeaguePlayersWidgetState();
+  State<CSGOPlayersWidget> createState() => _CSGOPlayersWidgetState();
 }
 
-class _LeaguePlayersWidgetState extends State<LeaguePlayersWidget> {
-  late LeaguePlayersModel _model;
+class _CSGOPlayersWidgetState extends State<CSGOPlayersWidget> {
+  late CSGOPlayersModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LeaguePlayersModel());
+    _model = createModel(context, () => CSGOPlayersModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -72,7 +72,7 @@ class _LeaguePlayersWidgetState extends State<LeaguePlayersWidget> {
             },
           ),
           title: Text(
-            'Search league',
+            'Player',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).allWhite,

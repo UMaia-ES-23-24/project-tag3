@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/prefabs/c_s_g_o_dialogue/c_s_g_o_dialogue_widget.dart';
 import '/prefabs/football_dialogue/football_dialogue_widget.dart';
 import '/prefabs/lolzinho_dialogue/lolzinho_dialogue_widget.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
             },
           ),
           title: Text(
-            'Search sports',
+            'Search sports b',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).allWhite,
@@ -255,13 +256,24 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                                   child: const SizedBox(
                                     height: 350.0,
                                     width: 530.0,
-                                    child: FootballDialogueWidget(),
+                                    child: CSGODialogueWidget(),
                                   ),
                                 ),
                               ),
                             );
                           },
                         ).then((value) => setState(() {}));
+                      },
+                      onLongPress: () async {
+                        if (FFAppState().Favorites.contains('CS:GO') == true) {
+                          setState(() {
+                            FFAppState().removeFromFavorites('CS:GO');
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().addToFavorites('CS:GO');
+                          });
+                        }
                       },
                       child: Container(
                         width: 350.0,
@@ -285,7 +297,7 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            if (FFAppState().Favorites.contains('CBLOL') ==
+                            if (FFAppState().Favorites.contains('CS:GO') ==
                                 true)
                               const Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -301,7 +313,7 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     15.0, 0.0, 0.0, 0.0),
                                 child: Text(
-                                  'Basketball',
+                                  'CS:GO',
                                   textAlign: TextAlign.start,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -324,9 +336,9 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                                   topRight: Radius.circular(0.0),
                                 ),
                                 child: Image.asset(
-                                  'assets/images/basketball-hd-png-basketball-png-hd-png-image-1245.png',
-                                  width: 80.0,
-                                  height: 80.0,
+                                  'assets/images/d5eyue2-6babad9c-aed7-4ce9-bb72-aa632a531264.png',
+                                  width: 100.0,
+                                  height: 100.0,
                                   fit: BoxFit.scaleDown,
                                   alignment: const Alignment(0.0, 0.0),
                                 ),

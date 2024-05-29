@@ -13,10 +13,10 @@ export 'foot_league_page_model.dart';
 class FootLeaguePageWidget extends StatefulWidget {
   const FootLeaguePageWidget({
     super.key,
-    required this.idLeague,
-  });
+    int? idLeague,
+  }) : idLeague = idLeague ?? 7020;
 
-  final dynamic idLeague;
+  final int idLeague;
 
   @override
   State<FootLeaguePageWidget> createState() => _FootLeaguePageWidgetState();
@@ -37,14 +37,23 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultg74 = await GetLeaguesCall.call();
+      _model.apiResultg74 = await FootStandingsCall.call(
+        league: FFAppState().idlegal.toString(),
+      );
       if ((_model.apiResultg74?.succeeded ?? true)) {
         setState(() {
-          FFAppState().listaLolzinho = GetLeaguesCall.ligas(
+          FFAppState().falhouCall = false;
+        });
+        setState(() {
+          FFAppState().listaLolzinho = FootStandingsCall.tudo(
             (_model.apiResultg74?.jsonBody ?? ''),
           )!
               .toList()
               .cast<dynamic>();
+        });
+      } else {
+        setState(() {
+          FFAppState().falhouCall = true;
         });
       }
     });
@@ -118,20 +127,11 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
               size: 30.0,
             ),
             onPressed: () async {
-              context.pushNamed(
-                'FootLigas',
-                extra: <String, dynamic>{
-                  kTransitionInfoKey: const TransitionInfo(
-                    hasTransition: true,
-                    transitionType: PageTransitionType.fade,
-                    duration: Duration(milliseconds: 0),
-                  ),
-                },
-              );
+              context.safePop();
             },
           ),
           title: Text(
-            'Games',
+            'Games ',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).allWhite,
@@ -198,7 +198,7 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
               Expanded(
                 child: Builder(
                   builder: (context) {
-                    final porFavor = GetLeaguesCall.ligas(
+                    final porFavor = FootStandingsCall.tudo(
                           (_model.apiResultg74?.jsonBody ?? ''),
                         )?.toList() ??
                         [];
@@ -209,285 +209,89 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
                       itemCount: porFavor.length,
                       itemBuilder: (context, porFavorIndex) {
                         final porFavorItem = porFavor[porFavorIndex];
-                        return Stack(
-                          children: [
-                            Padding(
+                        return Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              15.0, 10.0, 15.0, 0.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 1.0,
+                              ),
+                            ),
+                            child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 20.0),
-                              child: Column(
+                                  16.0, 0.0, 16.0, 0.0),
+                              child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            15.0, 10.0, 15.0, 0.0),
-                                        child: Container(
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 4.0, 0.0, 0.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(16.0, 12.0,
-                                                          16.0, 12.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          getJsonField(
-                                                            porFavorItem,
-                                                            r'''$.name''',
-                                                          ).toString(),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .displaySmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                fontSize: 20.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  height: 1.0,
-                                                  thickness: 1.0,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Flexible(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    5.0,
-                                                                    20.0,
-                                                                    5.0),
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              const BorderRadius.only(
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                          ),
-                                                          child: Image.network(
-                                                            getJsonField(
-                                                              porFavorItem,
-                                                              r'''$.opponents[0].opponent.image_url''',
-                                                            ).toString(),
-                                                            width: 100.0,
-                                                            height: 100.0,
-                                                            fit: BoxFit.contain,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      '${getJsonField(
-                                                        porFavorItem,
-                                                        r'''$.results[0].score''',
-                                                      ).toString()} X ${getJsonField(
-                                                        porFavorItem,
-                                                        r'''$.results[1].score''',
-                                                      ).toString()}',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'Readex Pro',
-                                                            fontSize: 35.0,
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                    ),
-                                                    Flexible(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    20.0,
-                                                                    5.0,
-                                                                    0.0,
-                                                                    5.0),
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              const BorderRadius.only(
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                          ),
-                                                          child: Image.network(
-                                                            getJsonField(
-                                                              porFavorItem,
-                                                              r'''$.opponents[1].opponent.image_url''',
-                                                            ).toString(),
-                                                            width: 100.0,
-                                                            height: 100.0,
-                                                            fit: BoxFit.contain,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ).animateOnPageLoad(animationsMap[
-                                            'containerOnPageLoadAnimation']!),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 10.0, 0.0, 10.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              width: 100.0,
-                                              height: 40.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              ),
-                                              alignment: const AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Text(
-                                                  'Video',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ].divide(const SizedBox(width: 20.0)),
+                                  Text(
+                                    getJsonField(
+                                      porFavorItem,
+                                      r'''$.rank''',
+                                    ).toString(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
                                         ),
-                                      ),
-                                    ],
                                   ),
-                                  ListView(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 0.0, 20.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                getJsonField(
-                                                  porFavorItem,
-                                                  r'''$.streams_list.*.embed_url''',
-                                                ).toString(),
-                                                textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                            Text(
-                                              getJsonField(
-                                                porFavorItem,
-                                                r'''$.streams_list.*.language''',
-                                              ).toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ],
+                                  SizedBox(
+                                    height: 40.0,
+                                    child: VerticalDivider(
+                                      thickness: 1.0,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent4,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      getJsonField(
+                                        porFavorItem,
+                                        r'''$.team.name''',
+                                      ).toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            fontSize: 20.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 40.0,
+                                    child: VerticalDivider(
+                                      thickness: 1.0,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent4,
+                                    ),
+                                  ),
+                                  Text(
+                                    getJsonField(
+                                      porFavorItem,
+                                      r'''$.points''',
+                                    ).toString(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
                                         ),
-                                      ),
-                                    ],
                                   ),
                                 ],
                               ),
                             ),
-                          ],
+                          ).animateOnPageLoad(
+                              animationsMap['containerOnPageLoadAnimation']!),
                         );
                       },
                     );

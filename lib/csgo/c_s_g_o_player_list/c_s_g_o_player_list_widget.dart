@@ -6,32 +6,32 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'lolzinho_ligas_model.dart';
-export 'lolzinho_ligas_model.dart';
+import 'c_s_g_o_player_list_model.dart';
+export 'c_s_g_o_player_list_model.dart';
 
-class LolzinhoLigasWidget extends StatefulWidget {
-  const LolzinhoLigasWidget({super.key});
+class CSGOPlayerListWidget extends StatefulWidget {
+  const CSGOPlayerListWidget({super.key});
 
   @override
-  State<LolzinhoLigasWidget> createState() => _LolzinhoLigasWidgetState();
+  State<CSGOPlayerListWidget> createState() => _CSGOPlayerListWidgetState();
 }
 
-class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
-  late LolzinhoLigasModel _model;
+class _CSGOPlayerListWidgetState extends State<CSGOPlayerListWidget> {
+  late CSGOPlayerListModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LolzinhoLigasModel());
+    _model = createModel(context, () => CSGOPlayerListModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultmov = await GetEsportCall.call();
+      _model.apiResultmov = await CSGOPlayersCall.call();
       if ((_model.apiResultmov?.succeeded ?? true)) {
         setState(() {
-          FFAppState().listaLolzinho = GetEsportCall.names(
+          FFAppState().listaLolzinho = CSGOPlayersCall.players(
             (_model.apiResultmov?.jsonBody ?? ''),
           )!
               .toList()
@@ -76,16 +76,7 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pushNamed(
-                'SearchSports',
-                extra: <String, dynamic>{
-                  kTransitionInfoKey: const TransitionInfo(
-                    hasTransition: true,
-                    transitionType: PageTransitionType.fade,
-                    duration: Duration(milliseconds: 0),
-                  ),
-                },
-              );
+              context.safePop();
             },
           ),
           title: Text(
@@ -190,125 +181,107 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
             Expanded(
               child: Builder(
                 builder: (context) {
-                  final lolzinho = FFAppState()
-                      .listaLolzinho
-                      .unique((e) => getJsonField(
-                            e,
-                            r'''$.league.name''',
-                          ))
-                      .toList();
+                  final lolzinho = FFAppState().listaLolzinho.toList();
                   return ListView.builder(
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.vertical,
                     itemCount: lolzinho.length,
                     itemBuilder: (context, lolzinhoIndex) {
                       final lolzinhoItem = lolzinho[lolzinhoIndex];
-                      return Visibility(
-                        visible: (FFAppState().Search ==
-                                getJsonField(
-                                  lolzinhoItem,
-                                  r'''$.league.name''',
-                                )) ||
-                            (FFAppState().Search == ''),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 12.0, 16.0, 0.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              setState(() {
-                                FFAppState().idlegal = getJsonField(
-                                  lolzinhoItem,
-                                  r'''$.serie_id''',
-                                );
-                              });
-
-                              context.pushNamed(
-                                'LoLMatches',
-                                queryParameters: {
-                                  'idLeague': serializeParam(
-                                    valueOrDefault<int>(
-                                      FFAppState().idlegal,
-                                      7020,
-                                    ),
-                                    ParamType.int,
-                                  ),
-                                }.withoutNulls,
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16.0, 12.0, 16.0, 0.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            setState(() {
+                              FFAppState().playerID = getJsonField(
+                                lolzinhoItem,
+                                r'''$.id''',
                               );
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                boxShadow: const [
-                                  BoxShadow(
-                                    blurRadius: 3.0,
-                                    color: Color(0x33000000),
-                                    offset: Offset(
-                                      0.0,
-                                      1.0,
-                                    ),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      child: Image.network(
-                                        getJsonField(
-                                          lolzinhoItem,
-                                          r'''$.league.image_url''',
-                                        ).toString(),
-                                        width: 44.0,
-                                        height: 44.0,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            12.0, 0.0, 0.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              getJsonField(
-                                                lolzinhoItem,
-                                                r'''$.league.name''',
-                                              ).toString(),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyLarge
-                                                  .override(
-                                                    fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 16.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                            });
+
+                            context.pushNamed(
+                              'CSGOPlayers',
+                              queryParameters: {
+                                'playerSelecionado': serializeParam(
+                                  lolzinhoItem,
+                                  ParamType.JSON,
                                 ),
+                              }.withoutNulls,
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 3.0,
+                                  color: Color(0x33000000),
+                                  offset: Offset(
+                                    0.0,
+                                    1.0,
+                                  ),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    child: Image.network(
+                                      getJsonField(
+                                        lolzinhoItem,
+                                        r'''$.current_team.image_url''',
+                                      ).toString(),
+                                      width: 44.0,
+                                      height: 44.0,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 0.0, 0.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            getJsonField(
+                                              lolzinhoItem,
+                                              r'''$.name''',
+                                            ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge
+                                                .override(
+                                                  fontFamily:
+                                                      'Plus Jakarta Sans',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),

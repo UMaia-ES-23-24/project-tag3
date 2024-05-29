@@ -28,6 +28,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _videoURL = prefs.getString('ff_videoURL') ?? _videoURL;
     });
+    _safeInit(() {
+      _playerID = prefs.getInt('ff_playerID') ?? _playerID;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -196,6 +199,42 @@ class FFAppState extends ChangeNotifier {
   set videoURL(String value) {
     _videoURL = value;
     prefs.setString('ff_videoURL', value);
+  }
+
+  int _playerID = 0;
+  int get playerID => _playerID;
+  set playerID(int value) {
+    _playerID = value;
+    prefs.setInt('ff_playerID', value);
+  }
+
+  List<dynamic> _fixtures = [];
+  List<dynamic> get fixtures => _fixtures;
+  set fixtures(List<dynamic> value) {
+    _fixtures = value;
+  }
+
+  void addToFixtures(dynamic value) {
+    _fixtures.add(value);
+  }
+
+  void removeFromFixtures(dynamic value) {
+    _fixtures.remove(value);
+  }
+
+  void removeAtIndexFromFixtures(int index) {
+    _fixtures.removeAt(index);
+  }
+
+  void updateFixturesAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _fixtures[index] = updateFn(_fixtures[index]);
+  }
+
+  void insertAtIndexInFixtures(int index, dynamic value) {
+    _fixtures.insert(index, value);
   }
 }
 

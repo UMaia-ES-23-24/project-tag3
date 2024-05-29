@@ -189,12 +189,25 @@ class _FootLigasWidgetState extends State<FootLigasWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            setState(() {
+                              FFAppState().idlegal = getJsonField(
+                                leagueItem,
+                                r'''$.league.id''',
+                              );
+                            });
+
                             context.pushNamed(
-                              'footLeaguePage',
+                              'FootLeaguePage',
                               queryParameters: {
                                 'idLeague': serializeParam(
-                                  leagueItem,
-                                  ParamType.JSON,
+                                  valueOrDefault<int>(
+                                    getJsonField(
+                                      leagueItem,
+                                      r'''$.league.id''',
+                                    ),
+                                    33,
+                                  ),
+                                  ParamType.int,
                                 ),
                               }.withoutNulls,
                               extra: <String, dynamic>{

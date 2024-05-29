@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'lo_l_league_page_model.dart';
-export 'lo_l_league_page_model.dart';
+import 'c_s_g_o_matches_model.dart';
+export 'c_s_g_o_matches_model.dart';
 
-class LoLLeaguePageWidget extends StatefulWidget {
-  const LoLLeaguePageWidget({
+class CSGOMatchesWidget extends StatefulWidget {
+  const CSGOMatchesWidget({
     super.key,
     int? idLeague,
   }) : idLeague = idLeague ?? 7020;
@@ -19,12 +19,12 @@ class LoLLeaguePageWidget extends StatefulWidget {
   final int idLeague;
 
   @override
-  State<LoLLeaguePageWidget> createState() => _LoLLeaguePageWidgetState();
+  State<CSGOMatchesWidget> createState() => _CSGOMatchesWidgetState();
 }
 
-class _LoLLeaguePageWidgetState extends State<LoLLeaguePageWidget>
+class _CSGOMatchesWidgetState extends State<CSGOMatchesWidget>
     with TickerProviderStateMixin {
-  late LoLLeaguePageModel _model;
+  late CSGOMatchesModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,22 +33,17 @@ class _LoLLeaguePageWidgetState extends State<LoLLeaguePageWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoLLeaguePageModel());
+    _model = createModel(context, () => CSGOMatchesModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultg74 = await LegueGetSeriesCall.call(
-        filter: valueOrDefault<int>(
-          FFAppState().idlegal,
-          7020,
-        ),
-      );
+      _model.apiResultg74 = await CSGOGetMatchCall.call();
       if ((_model.apiResultg74?.succeeded ?? true)) {
         setState(() {
           FFAppState().falhouCall = false;
         });
         setState(() {
-          FFAppState().listaLolzinho = LegueGetSeriesCall.seriesInfo(
+          FFAppState().listaLolzinho = CSGOGetMatchCall.cSGOMatchInfo(
             (_model.apiResultg74?.jsonBody ?? ''),
           )!
               .toList()
@@ -130,16 +125,7 @@ class _LoLLeaguePageWidgetState extends State<LoLLeaguePageWidget>
               size: 30.0,
             ),
             onPressed: () async {
-              context.pushNamed(
-                'LolzinhoLigas',
-                extra: <String, dynamic>{
-                  kTransitionInfoKey: const TransitionInfo(
-                    hasTransition: true,
-                    transitionType: PageTransitionType.fade,
-                    duration: Duration(milliseconds: 0),
-                  ),
-                },
-              );
+              context.safePop();
             },
           ),
           title: Text(
@@ -210,7 +196,7 @@ class _LoLLeaguePageWidgetState extends State<LoLLeaguePageWidget>
               Expanded(
                 child: Builder(
                   builder: (context) {
-                    final porFavor = LegueGetSeriesCall.seriesInfo(
+                    final porFavor = CSGOGetMatchCall.cSGOMatchInfo(
                           (_model.apiResultg74?.jsonBody ?? ''),
                         )?.toList() ??
                         [];

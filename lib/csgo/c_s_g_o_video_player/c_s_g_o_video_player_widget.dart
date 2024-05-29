@@ -5,11 +5,11 @@ import '/flutter_flow/flutter_flow_youtube_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'videoplayer_league_model.dart';
-export 'videoplayer_league_model.dart';
+import 'c_s_g_o_video_player_model.dart';
+export 'c_s_g_o_video_player_model.dart';
 
-class VideoplayerLeagueWidget extends StatefulWidget {
-  const VideoplayerLeagueWidget({
+class CSGOVideoPlayerWidget extends StatefulWidget {
+  const CSGOVideoPlayerWidget({
     super.key,
     required this.leagueInfoDoJogoSelecionado,
   });
@@ -17,19 +17,18 @@ class VideoplayerLeagueWidget extends StatefulWidget {
   final dynamic leagueInfoDoJogoSelecionado;
 
   @override
-  State<VideoplayerLeagueWidget> createState() =>
-      _VideoplayerLeagueWidgetState();
+  State<CSGOVideoPlayerWidget> createState() => _CSGOVideoPlayerWidgetState();
 }
 
-class _VideoplayerLeagueWidgetState extends State<VideoplayerLeagueWidget> {
-  late VideoplayerLeagueModel _model;
+class _CSGOVideoPlayerWidgetState extends State<CSGOVideoPlayerWidget> {
+  late CSGOVideoPlayerModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => VideoplayerLeagueModel());
+    _model = createModel(context, () => CSGOVideoPlayerModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -70,7 +69,7 @@ class _VideoplayerLeagueWidgetState extends State<VideoplayerLeagueWidget> {
                 size: 30.0,
               ),
               onPressed: () async {
-                context.pushNamed('LoLMatches');
+                context.safePop();
               },
             ),
             title: Text(
@@ -204,7 +203,7 @@ class _VideoplayerLeagueWidgetState extends State<VideoplayerLeagueWidget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   context.pushNamed(
-                                    'VideoplayerLeague',
+                                    'CSGOVideoPlayer',
                                     queryParameters: {
                                       'leagueInfoDoJogoSelecionado':
                                           serializeParam(
