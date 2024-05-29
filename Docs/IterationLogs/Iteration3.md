@@ -5,15 +5,13 @@
 
 ## What should we do differently?
 
-- Now that we can use more than 2 api calls, some calls could have been changed for more specific ones.
+- Some of our chosen apis ended up being useless because of paywalls or just poor quality which resulted in last minute changes to the sports
 
 ## What still puzzles me?
-
-- With the current number of students working it will be hard to make every other sport category.
     
-- favorites were made in a way that only saves the name because we couldn't figure out how to do a list that would update a container with different variables.
+- We were unable to make a leaderboard for all sports since a lot of apis paywall features like scoring
 
-- Video player only works with youtube links.
+- There might be a way to use a twitch/bili bili video player but we are still unsure of how to do it
 
 
 
