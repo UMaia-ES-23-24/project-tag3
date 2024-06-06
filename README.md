@@ -30,6 +30,7 @@ For sport fans who need more information about their favorite team(s), Uresults 
 
 
 
+
 ## Required API's
 
 - [Panda Score](https://developers.pandascore.co/docs/introduction)
