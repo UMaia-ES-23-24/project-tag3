@@ -31,9 +31,6 @@ For sport fans who need more information about their favorite team(s), Uresults 
 
 ## Required API's
 
-- [Balldontlie](https://www.balldontlie.io/)
-- [Football Prediction](https://developer.boggio-analytics.com/getting-started/api-endpoints)
-- [Riot Api](https://developer.riotgames.com/apis)
 - [Panda Score](https://developers.pandascore.co/docs/introduction)
 - [Api Football](https://www.api-football.com/)
-- [Rapid Api](https://rapidapi.com/api-sports/api/api-nba/)
+
