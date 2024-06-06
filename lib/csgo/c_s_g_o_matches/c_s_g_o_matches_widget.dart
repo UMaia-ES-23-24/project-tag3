@@ -39,20 +39,17 @@ class _CSGOMatchesWidgetState extends State<CSGOMatchesWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResultg74 = await CSGOGetMatchCall.call();
       if ((_model.apiResultg74?.succeeded ?? true)) {
-        setState(() {
-          FFAppState().falhouCall = false;
-        });
-        setState(() {
-          FFAppState().listaLolzinho = CSGOGetMatchCall.cSGOMatchInfo(
-            (_model.apiResultg74?.jsonBody ?? ''),
-          )!
-              .toList()
-              .cast<dynamic>();
-        });
+        FFAppState().falhouCall = false;
+        setState(() {});
+        FFAppState().listaLolzinho = CSGOGetMatchCall.cSGOMatchInfo(
+          (_model.apiResultg74?.jsonBody ?? ''),
+        )!
+            .toList()
+            .cast<dynamic>();
+        setState(() {});
       } else {
-        setState(() {
-          FFAppState().falhouCall = true;
-        });
+        FFAppState().falhouCall = true;
+        setState(() {});
       }
     });
 

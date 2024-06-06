@@ -220,12 +220,11 @@ class _CSGOVideoPlayerWidgetState extends State<CSGOVideoPlayerWidget> {
                                     },
                                   );
 
-                                  FFAppState().update(() {
-                                    FFAppState().videoURL = getJsonField(
-                                      videoURLItem,
-                                      r'''$.raw_url''',
-                                    ).toString();
-                                  });
+                                  FFAppState().videoURL = getJsonField(
+                                    videoURLItem,
+                                    r'''$.raw_url''',
+                                  ).toString();
+                                  FFAppState().update(() {});
                                 },
                                 child: Text(
                                   getJsonField(

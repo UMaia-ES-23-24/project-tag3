@@ -24,3 +24,8 @@ export '/csgo/c_s_g_o_video_player/c_s_g_o_video_player_widget.dart'
     show CSGOVideoPlayerWidget;
 export '/foot/foot_league_page/foot_league_page_widget.dart'
     show FootLeaguePageWidget;
+export '/foot/foot_league_players/foot_league_players_widget.dart'
+    show FootLeaguePlayersWidget;
+export '/foot/foot_players/foot_players_widget.dart' show FootPlayersWidget;
+export '/foot/foot_solo_player/foot_solo_player_widget.dart'
+    show FootSoloPlayerWidget;

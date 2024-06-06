@@ -13,12 +13,11 @@ class GetLeaguesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getLeagues',
       apiUrl:
-          'https://raw.githubusercontent.com/UMaia-ES-23-24/project-tag3/main/getleagues.json?token=GHSAT0AAAAAACOPZ2FKUI5DANSXF53E2A52ZSQ3WZA',
+          'https://raw.githubusercontent.com/UMaia-ES-23-24/project-tag3/main/getleagues.json?token=GHSAT0AAAAAACOPZ2FKF2ZQVRDQUBZ6XHWEZTAV6MA',
       callType: ApiCallType.GET,
       headers: {},
       params: {
-        'season': 2020,
-        'league': 39,
+        'type': "league",
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -342,6 +341,65 @@ class CSGOPlayersCall {
       ) as List?;
 }
 
+class GetplayersFootCall {
+  static Future<ApiCallResponse> call({
+    String? league = '61',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getplayersFoot',
+      apiUrl: 'https://api-football-v1.p.rapidapi.com/v3/players',
+      callType: ApiCallType.GET,
+      headers: {
+        'accept': 'application/json',
+        'X-RapidAPI-Key': '94cc702bcdmsh9bf2fc562936d5ap156bd3jsn1a8eba97d1ba',
+      },
+      params: {
+        'season': "2023",
+        'league': league,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? players(dynamic response) => getJsonField(
+        response,
+        r'''$.response.*''',
+        true,
+      ) as List?;
+}
+
+class GetLigasFoootCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetLigasFooot',
+      apiUrl: 'https://api-football-v1.p.rapidapi.com/v3/leagues',
+      callType: ApiCallType.GET,
+      headers: {
+        'accept': 'application/json',
+        'X-RapidAPI-Key': '94cc702bcdmsh9bf2fc562936d5ap156bd3jsn1a8eba97d1ba',
+      },
+      params: {
+        'type': "league",
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? ligas(dynamic response) => getJsonField(
+        response,
+        r'''$.response.*''',
+        true,
+      ) as List?;
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
@@ -358,10 +416,17 @@ class ApiPagingParams {
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
 }
 
+String _toEncodable(dynamic item) {
+  if (item is DocumentReference) {
+    return item.path;
+  }
+  return item;
+}
+
 String _serializeList(List? list) {
   list ??= <String>[];
   try {
-    return json.encode(list);
+    return json.encode(list, toEncodable: _toEncodable);
   } catch (_) {
     if (kDebugMode) {
       print("List serialization failed. Returning empty list.");
@@ -373,7 +438,7 @@ String _serializeList(List? list) {
 String _serializeJson(dynamic jsonVar, [bool isList = false]) {
   jsonVar ??= (isList ? [] : {});
   try {
-    return json.encode(jsonVar);
+    return json.encode(jsonVar, toEncodable: _toEncodable);
   } catch (_) {
     if (kDebugMode) {
       print("Json serialization failed. Returning empty json.");

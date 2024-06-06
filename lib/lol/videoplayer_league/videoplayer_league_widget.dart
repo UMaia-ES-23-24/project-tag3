@@ -221,12 +221,11 @@ class _VideoplayerLeagueWidgetState extends State<VideoplayerLeagueWidget> {
                                     },
                                   );
 
-                                  FFAppState().update(() {
-                                    FFAppState().videoURL = getJsonField(
-                                      videoURLItem,
-                                      r'''$.raw_url''',
-                                    ).toString();
-                                  });
+                                  FFAppState().videoURL = getJsonField(
+                                    videoURLItem,
+                                    r'''$.raw_url''',
+                                  ).toString();
+                                  FFAppState().update(() {});
                                 },
                                 child: Text(
                                   getJsonField(

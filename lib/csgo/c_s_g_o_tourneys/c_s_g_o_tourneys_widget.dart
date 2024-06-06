@@ -30,13 +30,12 @@ class _CSGOTourneysWidgetState extends State<CSGOTourneysWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResultmov = await CSGOGetTournamentCall.call();
       if ((_model.apiResultmov?.succeeded ?? true)) {
-        setState(() {
-          FFAppState().listaLolzinho = CSGOGetTournamentCall.cSGOTourney(
-            (_model.apiResultmov?.jsonBody ?? ''),
-          )!
-              .toList()
-              .cast<dynamic>();
-        });
+        FFAppState().listaLolzinho = CSGOGetTournamentCall.cSGOTourney(
+          (_model.apiResultmov?.jsonBody ?? ''),
+        )!
+            .toList()
+            .cast<dynamic>();
+        setState(() {});
       }
     });
 
@@ -121,10 +120,9 @@ class _CSGOTourneysWidgetState extends State<CSGOTourneysWidget> {
                           '_model.searchTermTextController',
                           const Duration(milliseconds: 500),
                           () async {
-                            setState(() {
-                              FFAppState().Search =
-                                  _model.searchTermTextController.text;
-                            });
+                            FFAppState().Search =
+                                _model.searchTermTextController.text;
+                            setState(() {});
                           },
                         ),
                         autofocus: false,
@@ -219,12 +217,11 @@ class _CSGOTourneysWidgetState extends State<CSGOTourneysWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              setState(() {
-                                FFAppState().idlegal = getJsonField(
-                                  lolzinhoItem,
-                                  r'''$.serie_id''',
-                                );
-                              });
+                              FFAppState().idlegal = getJsonField(
+                                lolzinhoItem,
+                                r'''$.serie_id''',
+                              );
+                              setState(() {});
 
                               context.pushNamed(
                                 'CSGOMatches',

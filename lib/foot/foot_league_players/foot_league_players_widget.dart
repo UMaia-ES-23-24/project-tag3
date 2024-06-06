@@ -5,25 +5,26 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'foot_ligas_model.dart';
-export 'foot_ligas_model.dart';
+import 'foot_league_players_model.dart';
+export 'foot_league_players_model.dart';
 
-class FootLigasWidget extends StatefulWidget {
-  const FootLigasWidget({super.key});
+class FootLeaguePlayersWidget extends StatefulWidget {
+  const FootLeaguePlayersWidget({super.key});
 
   @override
-  State<FootLigasWidget> createState() => _FootLigasWidgetState();
+  State<FootLeaguePlayersWidget> createState() =>
+      _FootLeaguePlayersWidgetState();
 }
 
-class _FootLigasWidgetState extends State<FootLigasWidget> {
-  late FootLigasModel _model;
+class _FootLeaguePlayersWidgetState extends State<FootLeaguePlayersWidget> {
+  late FootLeaguePlayersModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => FootLigasModel());
+    _model = createModel(context, () => FootLeaguePlayersModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -129,7 +130,7 @@ class _FootLigasWidgetState extends State<FootLigasWidget> {
                             setState(() {});
 
                             context.pushNamed(
-                              'FootLeaguePage',
+                              'FootPlayers',
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: const TransitionInfo(
                                   hasTransition: true,

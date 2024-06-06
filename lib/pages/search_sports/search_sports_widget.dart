@@ -30,9 +30,8 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.isShowFullList = !_model.isShowFullList;
-      });
+      _model.isShowFullList = !_model.isShowFullList;
+      setState(() {});
     });
   }
 
@@ -81,7 +80,7 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
             },
           ),
           title: Text(
-            'Search sports b',
+            'Search sports',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).allWhite,
@@ -142,13 +141,11 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                       onLongPress: () async {
                         if (FFAppState().Favorites.contains('Football') ==
                             true) {
-                          setState(() {
-                            FFAppState().removeFromFavorites('Football');
-                          });
+                          FFAppState().removeFromFavorites('Football');
+                          setState(() {});
                         } else {
-                          setState(() {
-                            FFAppState().addToFavorites('Football');
-                          });
+                          FFAppState().addToFavorites('Football');
+                          setState(() {});
                         }
                       },
                       child: Container(
@@ -237,7 +234,6 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                       highlightColor: Colors.transparent,
                       onTap: () async {
                         await showDialog(
-                          barrierDismissible: false,
                           context: context,
                           builder: (dialogContext) {
                             return Dialog(
@@ -266,13 +262,11 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                       },
                       onLongPress: () async {
                         if (FFAppState().Favorites.contains('CS:GO') == true) {
-                          setState(() {
-                            FFAppState().removeFromFavorites('CS:GO');
-                          });
+                          FFAppState().removeFromFavorites('CS:GO');
+                          setState(() {});
                         } else {
-                          setState(() {
-                            FFAppState().addToFavorites('CS:GO');
-                          });
+                          FFAppState().addToFavorites('CS:GO');
+                          setState(() {});
                         }
                       },
                       child: Container(
@@ -392,14 +386,11 @@ class _SearchSportsWidgetState extends State<SearchSportsWidget> {
                                 .Favorites
                                 .contains('League of Legends') ==
                             true) {
-                          setState(() {
-                            FFAppState()
-                                .removeFromFavorites('League of Legends');
-                          });
+                          FFAppState().removeFromFavorites('League of Legends');
+                          setState(() {});
                         } else {
-                          setState(() {
-                            FFAppState().addToFavorites('League of Legends');
-                          });
+                          FFAppState().addToFavorites('League of Legends');
+                          setState(() {});
                         }
                       },
                       child: Container(

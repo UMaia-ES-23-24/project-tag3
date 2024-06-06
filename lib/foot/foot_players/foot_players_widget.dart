@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'foot_league_page_model.dart';
-export 'foot_league_page_model.dart';
+import 'foot_players_model.dart';
+export 'foot_players_model.dart';
 
-class FootLeaguePageWidget extends StatefulWidget {
-  const FootLeaguePageWidget({
+class FootPlayersWidget extends StatefulWidget {
+  const FootPlayersWidget({
     super.key,
     int? idLeague,
   }) : idLeague = idLeague ?? 7020;
@@ -19,12 +19,12 @@ class FootLeaguePageWidget extends StatefulWidget {
   final int idLeague;
 
   @override
-  State<FootLeaguePageWidget> createState() => _FootLeaguePageWidgetState();
+  State<FootPlayersWidget> createState() => _FootPlayersWidgetState();
 }
 
-class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
+class _FootPlayersWidgetState extends State<FootPlayersWidget>
     with TickerProviderStateMixin {
-  late FootLeaguePageModel _model;
+  late FootPlayersModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,17 +33,17 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => FootLeaguePageModel());
+    _model = createModel(context, () => FootPlayersModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultg74 = await FootStandingsCall.call(
+      _model.apiResultg74 = await GetplayersFootCall.call(
         league: FFAppState().idlegal.toString(),
       );
       if ((_model.apiResultg74?.succeeded ?? true)) {
         FFAppState().falhouCall = false;
         setState(() {});
-        FFAppState().listaLolzinho = FootStandingsCall.tudo(
+        FFAppState().listaLolzinho = GetplayersFootCall.players(
           (_model.apiResultg74?.jsonBody ?? ''),
         )!
             .toList()
@@ -128,7 +128,7 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
             },
           ),
           title: Text(
-            'Leaderboard',
+            'Players',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).allWhite,
@@ -144,59 +144,6 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      '#',
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily: 'Outfit',
-                            fontSize: 20.0,
-                            letterSpacing: 0.0,
-                          ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40.0,
-                    child: VerticalDivider(
-                      thickness: 1.0,
-                      color: FlutterFlowTheme.of(context).accent4,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      'Nome',
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily: 'Outfit',
-                            fontSize: 20.0,
-                            letterSpacing: 0.0,
-                          ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40.0,
-                    child: VerticalDivider(
-                      thickness: 1.0,
-                      color: FlutterFlowTheme.of(context).accent4,
-                    ),
-                  ),
-                  Text(
-                    'Pontos',
-                    style: FlutterFlowTheme.of(context).displaySmall.override(
-                          fontFamily: 'Outfit',
-                          fontSize: 20.0,
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                ],
-              ),
-            ),
             if (FFAppState().falhouCall == true)
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(24.0, 60.0, 24.0, 0.0),
@@ -248,7 +195,7 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
               Expanded(
                 child: Builder(
                   builder: (context) {
-                    final porFavor = FootStandingsCall.tudo(
+                    final porFavor = GetplayersFootCall.players(
                           (_model.apiResultg74?.jsonBody ?? ''),
                         )?.toList() ??
                         [];
@@ -262,82 +209,78 @@ class _FootLeaguePageWidgetState extends State<FootLeaguePageWidget>
                         return Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               15.0, 10.0, 15.0, 0.0),
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(12.0),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 1.0,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                'FootSoloPlayer',
+                                queryParameters: {
+                                  'jogador': serializeParam(
+                                    porFavorItem,
+                                    ParamType.JSON,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(12.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  width: 1.0,
+                                ),
                               ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    getJsonField(
-                                      porFavorItem,
-                                      r'''$.rank''',
-                                    ).toString(),
-                                    style: FlutterFlowTheme.of(context)
-                                        .displaySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          fontSize: 20.0,
-                                          letterSpacing: 0.0,
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 30.0, 5.0),
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(0.0),
+                                          bottomRight: Radius.circular(0.0),
+                                          topLeft: Radius.circular(0.0),
+                                          topRight: Radius.circular(0.0),
                                         ),
-                                  ),
-                                  SizedBox(
-                                    height: 40.0,
-                                    child: VerticalDivider(
-                                      thickness: 1.0,
-                                      color:
-                                          FlutterFlowTheme.of(context).accent4,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      getJsonField(
-                                        porFavorItem,
-                                        r'''$.team.name''',
-                                      ).toString(),
-                                      style: FlutterFlowTheme.of(context)
-                                          .displaySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            fontSize: 20.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 40.0,
-                                    child: VerticalDivider(
-                                      thickness: 1.0,
-                                      color:
-                                          FlutterFlowTheme.of(context).accent4,
-                                    ),
-                                  ),
-                                  Text(
-                                    getJsonField(
-                                      porFavorItem,
-                                      r'''$.points''',
-                                    ).toString(),
-                                    style: FlutterFlowTheme.of(context)
-                                        .displaySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          fontSize: 20.0,
-                                          letterSpacing: 0.0,
+                                        child: Image.network(
+                                          getJsonField(
+                                            porFavorItem,
+                                            r'''$.player.photo''',
+                                          ).toString(),
+                                          width: 50.0,
+                                          height: 50.0,
+                                          fit: BoxFit.cover,
                                         ),
-                                  ),
-                                ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        getJsonField(
+                                          porFavorItem,
+                                          r'''$.player.name''',
+                                        ).toString(),
+                                        style: FlutterFlowTheme.of(context)
+                                            .displaySmall
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              fontSize: 20.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ).animateOnPageLoad(

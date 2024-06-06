@@ -31,13 +31,12 @@ class _LolzinhoPlayersListWidgetState extends State<LolzinhoPlayersListWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResultmov = await LeagueGetPlayersCall.call();
       if ((_model.apiResultmov?.succeeded ?? true)) {
-        setState(() {
-          FFAppState().listaLolzinho = LeagueGetPlayersCall.players(
-            (_model.apiResultmov?.jsonBody ?? ''),
-          )!
-              .toList()
-              .cast<dynamic>();
-        });
+        FFAppState().listaLolzinho = LeagueGetPlayersCall.players(
+          (_model.apiResultmov?.jsonBody ?? ''),
+        )!
+            .toList()
+            .cast<dynamic>();
+        setState(() {});
       }
     });
 
@@ -122,10 +121,9 @@ class _LolzinhoPlayersListWidgetState extends State<LolzinhoPlayersListWidget> {
                           '_model.searchTermTextController',
                           const Duration(milliseconds: 500),
                           () async {
-                            setState(() {
-                              FFAppState().Search =
-                                  _model.searchTermTextController.text;
-                            });
+                            FFAppState().Search =
+                                _model.searchTermTextController.text;
+                            setState(() {});
                           },
                         ),
                         autofocus: false,
@@ -207,12 +205,11 @@ class _LolzinhoPlayersListWidgetState extends State<LolzinhoPlayersListWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            setState(() {
-                              FFAppState().playerID = getJsonField(
-                                lolzinhoItem,
-                                r'''$.id''',
-                              );
-                            });
+                            FFAppState().playerID = getJsonField(
+                              lolzinhoItem,
+                              r'''$.id''',
+                            );
+                            setState(() {});
 
                             context.pushNamed(
                               'LeaguePlayers',

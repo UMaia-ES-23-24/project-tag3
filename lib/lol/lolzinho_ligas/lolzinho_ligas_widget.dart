@@ -30,13 +30,12 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResultmov = await GetEsportCall.call();
       if ((_model.apiResultmov?.succeeded ?? true)) {
-        setState(() {
-          FFAppState().listaLolzinho = GetEsportCall.names(
-            (_model.apiResultmov?.jsonBody ?? ''),
-          )!
-              .toList()
-              .cast<dynamic>();
-        });
+        FFAppState().listaLolzinho = GetEsportCall.names(
+          (_model.apiResultmov?.jsonBody ?? ''),
+        )!
+            .toList()
+            .cast<dynamic>();
+        setState(() {});
       }
     });
 
@@ -121,10 +120,9 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
                           '_model.searchTermTextController',
                           const Duration(milliseconds: 500),
                           () async {
-                            setState(() {
-                              FFAppState().Search =
-                                  _model.searchTermTextController.text;
-                            });
+                            FFAppState().Search =
+                                _model.searchTermTextController.text;
+                            setState(() {});
                           },
                         ),
                         autofocus: false,
@@ -219,12 +217,11 @@ class _LolzinhoLigasWidgetState extends State<LolzinhoLigasWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              setState(() {
-                                FFAppState().idlegal = getJsonField(
-                                  lolzinhoItem,
-                                  r'''$.serie_id''',
-                                );
-                              });
+                              FFAppState().idlegal = getJsonField(
+                                lolzinhoItem,
+                                r'''$.serie_id''',
+                              );
+                              setState(() {});
 
                               context.pushNamed(
                                 'LoLMatches',

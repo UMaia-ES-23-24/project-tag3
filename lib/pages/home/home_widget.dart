@@ -31,13 +31,11 @@ class _HomeWidgetState extends State<HomeWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if ((FFAppState().Favorites.isNotEmpty) == true) {
-        setState(() {
-          FFAppState().hasFavorites = true;
-        });
+        FFAppState().hasFavorites = true;
+        setState(() {});
       } else {
-        setState(() {
-          FFAppState().hasFavorites = false;
-        });
+        FFAppState().hasFavorites = false;
+        setState(() {});
       }
     });
   }

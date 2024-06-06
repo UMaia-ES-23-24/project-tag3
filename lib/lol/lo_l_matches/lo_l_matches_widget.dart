@@ -44,20 +44,17 @@ class _LoLMatchesWidgetState extends State<LoLMatchesWidget>
         ),
       );
       if ((_model.apiResultg74?.succeeded ?? true)) {
-        setState(() {
-          FFAppState().falhouCall = false;
-        });
-        setState(() {
-          FFAppState().listaLolzinho = LegueGetSeriesCall.seriesInfo(
-            (_model.apiResultg74?.jsonBody ?? ''),
-          )!
-              .toList()
-              .cast<dynamic>();
-        });
+        FFAppState().falhouCall = false;
+        setState(() {});
+        FFAppState().listaLolzinho = LegueGetSeriesCall.seriesInfo(
+          (_model.apiResultg74?.jsonBody ?? ''),
+        )!
+            .toList()
+            .cast<dynamic>();
+        setState(() {});
       } else {
-        setState(() {
-          FFAppState().falhouCall = true;
-        });
+        FFAppState().falhouCall = true;
+        setState(() {});
       }
     });
 

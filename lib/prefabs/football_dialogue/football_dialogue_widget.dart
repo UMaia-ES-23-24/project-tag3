@@ -97,8 +97,8 @@ class _FootballDialogueWidgetState extends State<FootballDialogueWidget> {
                       ),
                     ),
                     FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        context.pushNamed('FootLeaguePlayers');
                       },
                       text: 'Jogadores',
                       options: FFButtonOptions(

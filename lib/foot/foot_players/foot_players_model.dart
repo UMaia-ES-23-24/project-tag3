@@ -1,14 +1,14 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'foot_ligas_widget.dart' show FootLigasWidget;
+import 'foot_players_widget.dart' show FootPlayersWidget;
 import 'package:flutter/material.dart';
 
-class FootLigasModel extends FlutterFlowModel<FootLigasWidget> {
+class FootPlayersModel extends FlutterFlowModel<FootPlayersWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (GetLigasFooot)] action in FootLigas widget.
-  ApiCallResponse? apiResultyh0;
+  // Stores action output result for [Backend Call - API (getplayersFoot)] action in FootPlayers widget.
+  ApiCallResponse? apiResultg74;
 
   @override
   void initState(BuildContext context) {}

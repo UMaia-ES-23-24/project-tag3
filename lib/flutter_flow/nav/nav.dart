@@ -189,6 +189,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.int,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'FootLeaguePlayers',
+          path: '/footLeaguePlayers',
+          builder: (context, params) => const FootLeaguePlayersWidget(),
+        ),
+        FFRoute(
+          name: 'FootPlayers',
+          path: '/footPlayers',
+          builder: (context, params) => FootPlayersWidget(
+            idLeague: params.getParam(
+              'idLeague',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'FootSoloPlayer',
+          path: '/footSoloPlayer',
+          builder: (context, params) => FootSoloPlayerWidget(
+            jogador: params.getParam(
+              'jogador',
+              ParamType.JSON,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
