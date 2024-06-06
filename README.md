@@ -21,12 +21,13 @@ For sport fans who need more information about their favorite team(s), Uresults 
 ## Main Features
 
  - Feature 1 - Give information about matchups, in both Sports types
- - Feature 2 - Odds in diferent betting sites if available
+ - Feature 2 - Watch live matches
  - Feature 3 - Live Scores divided in competitions
  - Feature 4 - Live status of the players performance
  - Feature 5 - Show scoreboard
  - Feature 6 - Show the leaderboard of differente competitions
- - Feature 7 - Watch live matches
+ - Feature 7 - Change the theme of the app
+
 
 
 ## Required API's
