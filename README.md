@@ -4,15 +4,17 @@ TAG3
 
 ## Members
 
-Hugo Martins - A043898 <br>
-Diogo Soares Gonçalves - A042244 <br>
-João Pedro Ferreira Sá - A042256 <br>
-Otávio Affonso Araújo - A042508 <br>
 Gonçalo Caridade Ribeiro - A043540 <br>
+Otávio Affonso Araújo - A042508 <br>
+Diogo Soares Gonçalves - A042244 <br>
 
 # Product Name
 
 UResults
+
+# Presentation
+
+[Our Presentation](https://github.com/UMaia-ES-23-24/project-tag3/blob/main/Docs/Presentation.pdf)
 
 ## Vision Statement
 
